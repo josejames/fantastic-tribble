@@ -1,6 +1,7 @@
 <?php
   session_start();
   //session_destroy();
+
   if (!isset($_POST['inputUser']) || !isset($_POST['inputPassword']) ) {
 	  header("Location: ../login.php");
   }

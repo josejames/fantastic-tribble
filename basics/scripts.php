@@ -20,8 +20,5 @@
 	    		$( "#selectFecha" ).datepicker();
 	    		$( "#selectFecha" ).datepicker("setDate", new Date());
 	    		//alert($("#inputHorario").datepicker("getDate"));
-	    		$("table").selectable({
-  					filter: ".tdItem"
-				});
 	  		});
 		</script>

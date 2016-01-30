@@ -88,7 +88,7 @@
 						    <td>Column content</td>
 						    
 						  </tr>
-						  <tr class="active">
+						  <tr>
 						    <td>03</td>
 						    <td>Column content</td>
 						    <td>Column content</td>
@@ -116,7 +116,7 @@
 			    		<h3 class="panel-title">Datos de Hotel / Operador</h3>
 			  		</div>
 			  	<div class="panel-body">
-        			<form class="form-horizontal">
+        			<form class="form-horizontal" action="#">
 					  
 					  <fieldset>
 
@@ -133,8 +133,10 @@
 					      <label for="inputClave" class="col-md-2 control-label-sm">Clave</label>
 
 					      <div class="col-md-2">
-					        <input type="text" class="form-control" id="inputClave" placeholder="Clave" >
+					        <input type="text" class="form-control" id="inputClave" placeholder="Clave" maxlength="2" style="text-transform: uppercase;">
+					        <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
 					      </div>
+
 					    </div>
 					    
 					    <div class="form-group">
@@ -149,7 +151,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary">Guardar</button>
+					        <button type="submit" class="btn btn-primary" onclick="savetHotelData()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
@@ -162,6 +164,7 @@
 
 
 		<div class="col-md-2">
+
 
 		</div>
 		<div class="row">
@@ -176,6 +179,18 @@
 
 		<footer>
 
+			<table id="resultTable" class="table table-striped table-hover ">
+				 <tr id="first">
+				  <td>c1</td>      
+				  <td>c2</td>      
+				 </tr>
+				 <tr id="second">
+				  <td>c3</td>      
+				  <td>c4</td>      
+				  </tr>    
+				</table>
+
+
 
 		</footer>
 
@@ -186,6 +201,7 @@
 
 		<script>
 		  $.material.init();
+		  loadHoteles();
 		</script>
 
 	</body>

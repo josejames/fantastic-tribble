@@ -140,24 +140,42 @@
 					    <div class="form-group">
 					      <label for="inputAm" class="col-md-2 control-label-sm">Segundo Apellido</label>
 
-					      <div class="col-md-10">
+					       <div class="col-md-10">
 					        <input type="text" class="form-control" id="inputAm" placeholder="Segundo Apellido" >
+					       </div>
+					    </div>
+
+					    <div class="form-group">
+					      <div class="col-md-offset-2 col-md-10">
+					        <div class="togglebutton">
+					          <label>
+					            <input type="checkbox"> Administrador
+					          </label>
+					        </div>
 					      </div>
 					    </div>
 
 					    <div class="form-group">
 					      <label for="inputPassword" class="col-md-2 control-label-sm">Password</label>
 
-					      <div class="col-md-10">
-					        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-					      </div>
+					       <div class="col-md-10">
+					       	 <input type="password" class="form-control" id="inputPassword" placeholder="Password" >
+					       </div>
 					    </div>
+
+					    <!--<div class="form-group">
+					      <label for="inputPassword2" class="col-md-2 control-label-sm">Password</label>
+
+					      <div class="col-md-10">
+					        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+					      </div>
+					    </div>-->
 
 					    
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="guardarUsuario()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
