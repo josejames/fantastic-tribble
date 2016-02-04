@@ -47,13 +47,13 @@
             
       $registro = mysqli_fetch_row($result);
 
-      $_SESSION["clave"] = $registro[0];
-      $_SESSION["usuario"] = $registro[1];
+      $_SESSION["usuario"] = $registro[0];
+      $_SESSION["clave"] = $registro[1];
       $_SESSION["grado"] = $registro[2];
         
-      echo "Usuario = ".$_SESSION["usuario"];
+      /*echo "Usuario = ".$_SESSION["usuario"];
       echo " Password = ".$_SESSION["clave"];
-      echo " Grado = ".$_SESSION["grado"];
+      echo " Grado = ".$_SESSION["grado"];*/
           
       mysqli_free_result($result);
       $_SESSION["logueado"]=True;

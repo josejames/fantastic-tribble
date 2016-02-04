@@ -1,3 +1,5 @@
+var hotelIndex;
+
 /***********************************/
 /* Archivo de Script para procesar */
 /* los archivos de operadora       */
@@ -6,8 +8,11 @@
 /***********************************/
 $(document).ready(function () {      
      $('#resultTable tr').click(function (event) {
+     	  $('#resultTable tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
-          alert(this.id);
+          //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
+          $(this).children().addClass("success");
+          hotelIndex = this.id;
           
      });
  });
@@ -39,6 +44,10 @@ function savetHotelData() {
 	
 }
 
+/********************************************************/
+/* Function to recive the status of the inserted        */
+/* record in the institucion table in the db            */
+/********************************************************/
 function statusSaveHotel(resultado){
 
 	if (resultado.indexOf("EXITO")==-1) {
@@ -59,13 +68,13 @@ function verifyData(){
 	return true;
 }
 
-function loadHoteles(){
+/*function loadHoteles(){
 	//the Ajax call
 	//alert("cargando");
 	$.post("../controller/obtenhotel.php",null,
 	       statusLoadHoteles);
 
-}
+}*/
 
 function statusLoadHoteles(resultado){
 
@@ -76,5 +85,30 @@ function statusLoadHoteles(resultado){
 	else {
 		alert("loadHoteles recuperados con EXITO!");
 	}
+
+}
+
+function modificarHotel(){
+
+	alert("Hotel Index "+hotelIndex);
+	//$('#resultTable tr').children().css("background-color", "transparent");
+	$('#resultTable tr').children().removeClass("success");
+	//hotelIndex = null;
+	//MAkE THE AJAX CALL to get the hotel
+	var id_hotel = hotelIndex;
+	$.getJSON("../controller/obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
+}
+
+/**/
+/*function getHotel() {
+	var id_hotel = $("#Peli").val();
+	$.getJSON("obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
+}*/
+
+function statusGetHotel(datos){
+	
+	$("#inputNombre2").val(datos.nombre_hotel);
+	$("#inputClave2").val(datos.clave)
+
 
 }
