@@ -1,6 +1,6 @@
 <?php
 /* Object Oriented */
-// obtenhoteles.php
+// obtenhotel.php
 $texto = "ERROR: ";
 
 session_start();

@@ -16,6 +16,8 @@ $(document).ready(function () {
           
      });
  });
+
+
 /********************************************************/
 /* Function to retrieve the data from the hotel admin   */
 /*      form                                            */
@@ -68,26 +70,43 @@ function verifyData(){
 	return true;
 }
 
-/*function loadHoteles(){
+function loadHoteles(){
 	//the Ajax call
 	//alert("cargando");
-	$.post("../controller/obtenhotel.php",null,
+	$.post("../controller/obtenhoteles.php",null,
 	       statusLoadHoteles);
 
-}*/
+}
 
 function statusLoadHoteles(resultado){
 
-	if (resultado.indexOf("EXITO")==-1) {
+	if (resultado.indexOf("<tr")==-1) {
 		//algo ocurrio mal
 		alert(resultado);
 	} 		 
 	else {
 		alert("loadHoteles recuperados con EXITO!");
+		$("#tbodyHotel").html(resultado);
+			
+			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
+ 		    $('#resultTable tr').click(function (event) {
+     		$('#resultTable tr').children().removeClass("success");
+          	//alert($(this).attr('id')); //trying to alert id of the clicked row
+          	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
+          	$(this).children().addClass("success");
+          	hotelIndex = this.id;
+          
+			});
+		
 	}
 
 }
 
+/**************************************/
+/* Ccargar los datos del hotel dentro */
+/* del form de actualizar el registro */
+/*                                    */
+/**************************************/
 function modificarHotel(){
 
 	alert("Hotel Index "+hotelIndex);
@@ -97,6 +116,7 @@ function modificarHotel(){
 	//MAkE THE AJAX CALL to get the hotel
 	var id_hotel = hotelIndex;
 	$.getJSON("../controller/obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
+	
 }
 
 /**/
@@ -111,4 +131,57 @@ function statusGetHotel(datos){
 	$("#inputClave2").val(datos.clave)
 
 
+}
+
+
+/******************************************/
+/**/
+/**/
+/**/
+/*******************************************/
+
+function updateHotel() {
+
+	var result = verifyData();
+
+	if(result){
+	//the data
+	var data = {
+			//inputs from the modal form
+			nombre : $("#inputNombre2").val(),
+			clave : $("#inputClave2").val()
+	}
+	//alert("Hola");
+	var message="info="+
+	         escape(JSON.stringify(data))
+
+	//the Ajax call
+	$.post("../controller/updatehotel.php",message,
+	        statusUpdatedHotel);
+	}
+	else{
+		$("#message").html("Debes Completar todos los campos :)");
+	}
+	
+}
+
+function statusUpdatedHotel(resultado){
+
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Hotel Actualizado Con EXITO!");
+		$("#tbodyHotel").empty();
+		loadHoteles();
+		//here we must recharge the table
+	}
+
+}
+
+function eliminar(){
+	alert("Hola");
+	$("#tbodyHotel").empty();
+	alert("Adios");
 }

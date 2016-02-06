@@ -75,7 +75,7 @@
 							    <th width="10%">Clave</th>
 							  </tr>
 						  </thead>
-						  <tbody>
+						  <tbody id="tbodyHotel">
 						  <!-- generated table -->
 
 						<?php
@@ -123,7 +123,7 @@
 						 </tbody>
 						</table>
 					</div>
-					<button type="button" class="btn btn-primary">Eliminar</button>
+					<button type="button" class="btn btn-primary" onclick="eliminar()">Eliminar</button>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog" onclick="modificarHotel()">Modificar</button>
 			  </div>
 			</div>
@@ -231,7 +231,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="">Guardar</button>
+					        <button type="submit" class="btn btn-primary" onclick="updateHotel()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
