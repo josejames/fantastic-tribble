@@ -1,5 +1,5 @@
 <?php
-// updatehotel.php
+// updateusuario.php
  $texto="ERROR: ";
  session_start();
  
@@ -24,22 +24,23 @@
 	        mysqli_query ($conn, "SET NAMES 'utf8'");
 	       //select the database
 		   if ( !mysqli_select_db($conn, $nombredb) ) {
-			  echo $texto." No se pudo seleccionar la base de datos ";
+			  echo $texto." No se pudo seleccionar la base de datos";
 		   }
 		   else {
-		   	   $sql="INSERT INTO usuario VALUES('".$datos['cuenta']."',";
-		   	   $sql .= "'".$datos['pass']."',";
-		   	   $sql .= "'".$datos['nombre']."',";
-		   	   $sql .= "'".$datos['apPat']."',";
-		   	   $sql .= "'".$datos['apMat']."',";
-               $sql .= "".$datos['admin'].")";
+		       $sql = "UPDATE usuario SET nombre='".$datos['nombre']."', ";
+		       $sql .= "apellidopaterno='".$datos['apPat']."',";
+		       $sql .= "apellidomaterno='".$datos['apMat']."',";
+		       $sql .= "grado=".$datos['admin']."";
+		       $sql .= " WHERE cuenta='".$datos['cuenta']."'";
+		       //VALUES('".$datos['nombre']."',";
+               //$sql .= "'".$datos['clave']."')";
 			   			  
 		       $result = mysqli_query($conn, $sql);
 				if ($result) {
 					echo  "EXITO";
 				}
 				else {
-					echo $texto." No se pudo agregar ".mysqli_error($conn);
+					echo $texto." No se pudo actualizar ".mysqli_error($conn);
 				}
 		   }
 	   }//else se conecto
