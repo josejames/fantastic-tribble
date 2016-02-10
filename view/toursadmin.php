@@ -69,8 +69,8 @@
 			    <h3 class="panel-title">Tours en el Sistema</h3>
 			  </div>
 			  <div class="panel-body">
-			    <div>
-					<table class="table table-striped table-hover " >
+			    <div style="overflow-y:scroll; height:250px;">
+					<table class="table table-hover " id="toursTable">
 						  <thead>
 							  <tr>
 							    <th id="selectable" width="10%">#Tour</th>
@@ -78,7 +78,7 @@
 							    <!--<th width="15%">Horario</th>-->
 							  </tr>
 						  </thead>
-						  <tbody>
+						  <tbody id="tbodyTours">
 						<?php
 							/* Object Oriented */
 							// obtenTours.php
@@ -97,15 +97,18 @@
 							            exit();
 							        }
 
-							        $consulta = "SELECT id_tour, nombre FROM tours";
+							        $consulta = "SELECT id_tour, nombre_tour FROM tours";
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
-							                //printf ("%s (%s)\n", $fila[0], $fila[1]);
+							                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
+							                if ($fila[0] < 9) {
+							                	$fila[0] = "0".$fila[0];
+							                }
 							                echo "<tr id=".$fila[0].">\n";
-							                	echo "<td>#</td>\n";
+							                	echo "<td>".$fila[0]."</td>\n";
 							                	echo "<td>".$fila[1]."</td>\n";
 							                echo "<tr>\n";
 							            }
@@ -121,7 +124,7 @@
 						</table>
 					</div>
 					<button type="button" class="btn btn-primary">Eliminar</button>
-					<button type="button" class="btn btn-primary">Modificar</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog" onclick="modificarTour()">Modificar</button>
 			  </div>
 			</div>
 
@@ -147,19 +150,19 @@
 					      </div>
 					    </div>
 					    
-					    <div class="form-group">
+					    <!--<div class="form-group">
 					      <label for="inputPassword" class="col-md-2 control-label-sm">Password</label>
 
 					      <div class="col-md-10">
 					        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
 					      </div>
-					    </div>
+					    </div>-->
 
 					    
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary">Guardar</button>
+					        <button type="submit" class="btn btn-primary" onclick="saveTourData()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
@@ -182,6 +185,57 @@
 		<!--
 		End Contenido
 		-->
+		<div id="complete-dialog" class="modal fade" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">Modificar Registro</h4>
+		      </div>
+		      <div class="modal-body">
+		        <!--Content-->
+		        <form class="form-horizontal" action="#">
+					  
+					  <fieldset>
+
+					    <!--<legend class="modal-title">Ingresa aqu&iacute; tus Reservaciones</legend>-->
+					   	<div class="form-group">
+					      <label for="inputID" class="col-md-2 control-label-sm">ID</label>
+
+					      <div class="col-md-2">
+					        <input type="text" class="form-control" id="inputID" placeholder="ID del tour">
+					      </div>
+					    </div>
+
+
+					    <div class="form-group">
+					      <label for="inputNombre2" class="col-md-2 control-label-sm" >Nombre</label>
+
+					      <div class="col-md-10">
+					        <input type="text" class="form-control" id="inputNombre2" placeholder="Nombre del hotel / operador">
+					      </div>
+					    </div>
+					  	
+					    <div class="form-group">
+					      <div class="col-md-10 col-md-offset-2">
+					        <button type="submit" class="btn btn-primary" onclick="updateTour()">Guardar</button>
+					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
+					      </div>
+					    </div>
+
+					  </fieldset>
+					</form>
+
+		        <!--Content-->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
 
 
 		<footer>
@@ -193,7 +247,7 @@
 			include '../basics/scripts.php';
 		?>
 
-
+		<script type="text/javascript" src="../bower_components/operadora_tours.js"></script>
 		<script>
 		  $.material.init();
 		</script>
