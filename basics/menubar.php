@@ -40,8 +40,8 @@
 			            <li><a href="../view/usuarios.php">Usuarios </a></li>
 			            <li><a href="../view/hoteles.php">Hoteles</a></li>
 			            <li><a href="../view/toursadmin.php">Tours</a></li>
-			            <li><a href="../view/usuarios.php">Clientes</a></li>
-			            <li><a href="javascript:void(0)">Horarios</a></li>
+			            <!--<li><a href="../view/usuarios.php">Clientes</a></li>-->
+			            <li><a href="../view/horarios.php">Horarios</a></li>
 			            <li class="divider"></li>
 			           
 			          </ul>
