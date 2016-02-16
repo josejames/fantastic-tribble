@@ -144,7 +144,7 @@
 					      <label for="inputNombre" class="col-md-2 control-label-sm">TOUR</label>
 
 					      <div class="col-md-10">
-					        <select class="form-control" id="selectNombre" placeholder="Selecciona Tour">
+					        <select class="form-control" id="selectTour" placeholder="Selecciona Tour">
 					        	<!-- Fill the options -->
 					        		<?php
 							/* Object Oriented */
@@ -176,7 +176,7 @@
 							                if ($fila[0] < 9) {
 							                	$fila[0] = "0".$fila[0];
 							                }
-							                echo "<option id=".$fila[0].">\n";
+							                echo "<option id=".$fila[0]." value=".$fila[0].">\n";
 							                	echo "".$fila[0]." ".$fila[1]."\n";
 											echo "</option>\n";
 							            }
@@ -204,7 +204,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="saveHorarioData()">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="saveHorarioData()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>

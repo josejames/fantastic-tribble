@@ -7,8 +7,8 @@ var tourIndex = -1;
 /* version 1.0                     */
 /***********************************/
 $(document).ready(function () {      
-     $('#toursTable tr').click(function (event) {
-     	  $('#toursTable tr').children().removeClass("success");
+     $('#horariosTable tr').click(function (event) {
+     	  $('#horariosTable tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
           //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           $(this).children().addClass("success");
@@ -25,25 +25,28 @@ $(document).ready(function () {
 function saveHorarioData() {
 
 
-	alert($("#inputTime").val());
-	/*var result = verifyData();
+	//alert($("#inputTime").val());
+	//alert($("#selectTour").val());
+	var result = verifyData();
+	var horario = $("#inputTime").val()+":00";
 	 
 	if(result){
 	//the data
 	var data = {
-			nombre : $("#inputNombre").val(),
+			horario : horario,
+			id_tour : $("#selectTour").val()
 	}
 	//alert("Hola");
 	var message="info="+
 	         escape(JSON.stringify(data))
 
 	//the Ajax call
-	$.post("../controller/agregatour.php",message,
+	$.post("../controller/agregahorario.php",message,
 	        statusSaveTour);
 	}
 	else{
 		$("#message").html("Debes Completar todos los campos :)");
-	}*/
+	}
 }
 
 /********************************************************/
@@ -74,7 +77,7 @@ function verifyData(){
 function loadTours(){
 	//the Ajax call
 	//alert("cargando");
-	$.post("../controller/obtentours.php",null,
+	$.post("../controller/obtenhorarios.php",null,
 	       statusLoadTours);
 
 }
@@ -86,15 +89,15 @@ function statusLoadTours(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("loadTours recuperados con EXITO!");
+		alert("loadHorarios recuperados con EXITO!");
 		//vaciamos la tabla
-		$("#tbodyTours").empty();
+		$("#tbodyHorarios").empty();
 		//rellenamos con la llamada ajax
-		$("#tbodyTours").html(resultado);
+		$("#tbodyHorarios").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		    $('#toursTable tr').click(function (event) {
-     		$('#toursTable tr').children().removeClass("success");
+ 		    $('#horariosTable tr').click(function (event) {
+     		$('#horariosTable tr').children().removeClass("success");
           	//alert($(this).attr('id')); //trying to alert id of the clicked row
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
@@ -114,8 +117,8 @@ function statusLoadTours(resultado){
 function modificarTour(){
 
 	alert("Usuario Index "+tourIndex);
-	//$('#toursTable tr').children().css("background-color", "transparent");
-	$('#toursTable tr').children().removeClass("success");
+	//$('#horariosTable tr').children().css("background-color", "transparent");
+	$('#horariosTable tr').children().removeClass("success");
 	//tourIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
 	var id_tour = tourIndex;
@@ -176,7 +179,7 @@ function statusUpdatedTour(resultado){
 	} 		 
 	else {
 		alert("Tour Actualizado Con EXITO!");
-		$("#tbodyTours").empty();
+		$("#tbodyHorarios").empty();
 		loadTours();
 		//here we must recharge the table
 	}
