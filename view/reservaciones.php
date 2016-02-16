@@ -61,7 +61,7 @@
 
       		<div class="col-md-8">
         		<div class="panel panel-default">
-					<form class="form-horizontal">
+					<form class="form-horizontal" id="formaReservacion">
 					  
 					  <fieldset>
 
@@ -144,14 +144,14 @@
 							        }
 
 							        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
-							        $consulta = "SELECT id_nacion, nombre FROM country";
+							        $consulta = "SELECT nombre FROM country";
 							        
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
-							            	echo '<option value="'.$fila[0].'">'.$fila[1]."     ".'</option>';
+							            	echo '<option value="'.$fila[0].'">'.$fila[0]."     ".'</option>';
 							            }
 
 							            /* liberar el conjunto de resultados */

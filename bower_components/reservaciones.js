@@ -63,7 +63,14 @@ function  saveReservacion(){
 }
 
 function statusSaveReserva(resultado){
-	alert(resultado);
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Reservacion Guardada!");
+		$("#formaReservacion").trigger("reset");
+	}
 }
 
 
