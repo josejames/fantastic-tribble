@@ -17,7 +17,7 @@
 			$(function() {
 	    		$( "#inputFecha" ).datepicker({ minDate: 0, dateFormat : "yy-mm-dd" });
 	    		$( "#inputFecha" ).datepicker("setDate", new Date());
-	    		$( "#selectFecha" ).datepicker();
+	    		$( "#selectFecha" ).datepicker({ dateFormat : "yy-mm-dd" });
 	    		$( "#selectFecha" ).datepicker("setDate", new Date());
 	    		//alert($("#inputHorario").datepicker("getDate"));
 	  		});
