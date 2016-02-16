@@ -32,7 +32,7 @@
     $cuenta = mysqli_real_escape_string($conn, $cuenta);
     $clave = stripslashes($_POST['inputPassword']);
     $clave = mysqli_real_escape_string($conn, $clave);
-    $consulta = "SELECT cuenta, clave, grado FROM usuario WHERE " .
+    $consulta = "SELECT cuenta, grado FROM usuario WHERE " .
       "cuenta='".$cuenta."' AND clave='" .$clave."'";
   
   $result = mysqli_query($conn, $consulta);
@@ -48,8 +48,8 @@
       $registro = mysqli_fetch_row($result);
 
       $_SESSION["usuario"] = $registro[0];
-      $_SESSION["clave"] = $registro[1];
-      $_SESSION["grado"] = $registro[2];
+      //$_SESSION["clave"] = $registro[1];
+      $_SESSION["grado"] = $registro[1];
         
       /*echo "Usuario = ".$_SESSION["usuario"];
       echo " Password = ".$_SESSION["clave"];

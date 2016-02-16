@@ -15,7 +15,7 @@
 		          <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Tours
 		            <b class="caret"></b></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="javascript:void(0)">Reservaciones</a></li>
+		            <li><a href="../view/reservaciones.php">Reservaciones</a></li>
 		            <li><a href="javascript:void(0)">Revisar Tour</a></li>
 		            <li class="divider"></li>
 		            <li><a href="javascript:void(0)">Reporte de recolección</a></li>

@@ -15,7 +15,7 @@
 		<!-- Date Picker-->
 		<script type="text/javascript">
 			$(function() {
-	    		$( "#inputFecha" ).datepicker({ minDate: 0});
+	    		$( "#inputFecha" ).datepicker({ minDate: 0, dateFormat : "yy-mm-dd" });
 	    		$( "#inputFecha" ).datepicker("setDate", new Date());
 	    		$( "#selectFecha" ).datepicker();
 	    		$( "#selectFecha" ).datepicker("setDate", new Date());

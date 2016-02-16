@@ -60,7 +60,7 @@
 		</div>
 
       		<div class="col-md-8">
-        		<div class="well bs-component">
+        		<div class="panel panel-default">
 					<form class="form-horizontal">
 					  
 					  <fieldset>
@@ -68,10 +68,47 @@
 					    <!--<legend class="modal-title">Ingresa aqu&iacute; tus Reservaciones</legend>-->
 					   
 					    <div class="form-group">
-					      <label for="inputOrganizacion" class="col-md-2 control-label-sm">Hotel/Operador</label>
+					      <label for="selectHotel" class="col-md-2 control-label-sm">Hotel/Operador</label>
 
 					      <div class="col-md-10">
-					        <input type="text" class="form-control" id="inputOrganizacion" placeholder="Hotel/Operador">
+					        <!--<input type="text" class="form-control" id="inputOrganizacion" placeholder="Hotel/Operador">-->
+					        <select id="selectHotel" class="form-control">
+					        	<?php
+									/* Object Oriented */
+									// obtenTours.php
+									$texto = "ERROR: ";
+						
+							        //archivo de configuracion
+							        include '../controller/config.php';
+
+							        $mysqli = new mysqli($hostdb, $usuariodb, $clavedb, $nombredb);
+							        //$conn = mysql_connect($hostdb, $usuariodb, $clavedb);
+
+							        /* comprobar la conexión */
+							        if (mysqli_connect_errno()) {
+							            echo $texto . mysqli_connect_error();
+							            /**printf("Falló la conexión: %s\n", mysqli_connect_error());**/
+							            exit();
+							        }
+
+							        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
+							        $consulta = "SELECT clave_hotel FROM institucion";
+							        
+
+							        if ($resultado = $mysqli->query($consulta)) {
+
+							            /* obtener el array de objetos */
+							            while ($fila = $resultado->fetch_row()) {
+							            	echo '<option value="'.$fila[0].'">'.$fila[0]."     ".'</option>';
+							            }
+
+							            /* liberar el conjunto de resultados */
+							            $resultado->close();
+							        }
+							        /* cerrar la conexión */
+							        $mysqli->close();
+								?>
+					        </select>
 					      </div>
 					    </div>
 					  	<div class="form-group">
@@ -86,7 +123,44 @@
 					      <label for="inputProcendencia" class="col-md-2 control-label-sm">Procedencia</label>
 
 					      <div class="col-md-10">
-					        <input type="text" class="form-control" id="inputProcedencia" placeholder="Procedencia">
+					        <!--<input type="text" class="form-control" id="inputProcedencia" placeholder="Procedencia">-->
+					        <select id="selectProcedencia" class="form-control">
+					        	<?php
+									/* Object Oriented */
+									// obtenTours.php
+									$texto = "ERROR: ";
+						
+							        //archivo de configuracion
+							        include '../controller/config.php';
+
+							        $mysqli = new mysqli($hostdb, $usuariodb, $clavedb, $nombredb);
+							        //$conn = mysql_connect($hostdb, $usuariodb, $clavedb);
+
+							        /* comprobar la conexión */
+							        if (mysqli_connect_errno()) {
+							            echo $texto . mysqli_connect_error();
+							            /**printf("Falló la conexión: %s\n", mysqli_connect_error());**/
+							            exit();
+							        }
+
+							        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
+							        $consulta = "SELECT id_nacion, nombre FROM country";
+							        
+
+							        if ($resultado = $mysqli->query($consulta)) {
+
+							            /* obtener el array de objetos */
+							            while ($fila = $resultado->fetch_row()) {
+							            	echo '<option value="'.$fila[0].'">'.$fila[1]."     ".'</option>';
+							            }
+
+							            /* liberar el conjunto de resultados */
+							            $resultado->close();
+							        }
+							        /* cerrar la conexión */
+							        $mysqli->close();
+								?>
+					        </select>
 					      </div>
 					    </div>
 
@@ -95,22 +169,50 @@
 					      <label for="selectRecorrido" class="col-md-2 control-label-sm">Recorrido</label>
 
 					      <div class="col-md-8">
-					        <select id="selectRecorrido" class="form-control">
-					          <option>1 Zacatecas Impresionante</option>
-					          <option>2</option>
-					          <option>3</option>
-					          <option>4</option>
-					          <option>5</option>
+					        <select id="selectRecorrido" class="form-control" onchange="cargaHorarios()">
+					        	<option value="-1">Selecciona Tour</option>
+					         <?php
+								/* Object Oriented */
+								// obtenTours.php
+								$texto = "ERROR: ";
+						
+							        //archivo de configuracion
+							        include '../controller/config.php';
+
+							        $mysqli = new mysqli($hostdb, $usuariodb, $clavedb, $nombredb);
+							        //$conn = mysql_connect($hostdb, $usuariodb, $clavedb);
+
+							        /* comprobar la conexión */
+							        if (mysqli_connect_errno()) {
+							            echo $texto . mysqli_connect_error();
+							            /**printf("Falló la conexión: %s\n", mysqli_connect_error());**/
+							            exit();
+							        }
+
+							        $consulta = "SELECT id_tour, nombre_tour FROM tours";
+
+							        if ($resultado = $mysqli->query($consulta)) {
+
+							            /* obtener el array de objetos */
+							            while ($fila = $resultado->fetch_row()) {
+							        
+							                echo "<option value=".$fila[0].">\n";
+							                	echo "". ($fila[0] <= 9 ? "0".$fila[0] : $fila[0]) ."";
+							                	echo " ".$fila[1]."";
+							                echo "</option>\n";
+							            }
+
+							            /* liberar el conjunto de resultados */
+							            $resultado->close();
+							        }
+							        /* cerrar la conexión */
+							        $mysqli->close();
+						?>
 					        </select>
 					      </div>
 
 					      <div class="col-md-2">
 					      	<select id="selectHorario" class="form-control">
-					          <option>10:00 am</option>
-					          <option>2</option>
-					          <option>3</option>
-					          <option>4</option>
-					          <option>5</option>
 					        </select>
 					      </div>
 
@@ -129,19 +231,19 @@
 					      <label for="inputPersonas" class="col-md-2 control-label-sm">Personas</label>
 
 					      <div class="col-md-2">
-					        <input type="number" class="form-control" id="input1" placeholder="Adultos" min="0">
+					        <input type="number" class="form-control" id="inputAd" placeholder="Adultos" min="0">
 					      </div>
 					      <div class="col-md-2">
-					        <input type="number" class="form-control" id="input1" placeholder="Ni&ntilde;os" min="0">
+					        <input type="number" class="form-control" id="inputNi" placeholder="Ni&ntilde;os" min="0">
 					      </div>
 					      <div class="col-md-2">
-					        <input type="number" class="form-control" id="input1" placeholder="INSEN" min="0">
+					        <input type="number" class="form-control" id="inputIn" placeholder="INSEN" min="0">
 					      </div>
 					    </div>
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="saveReservacion()">Guardar</button>
 					        <button type="button" class="btn btn-default">Nuevo</button>
 					      </div>
 					    </div>
@@ -178,6 +280,39 @@
 		<script>
 		  $.material.init();
 		</script>
+		<script type="text/javascript" src="../bower_components/reservaciones.js"></script>
+		<script type="text/javascript">
+		$(function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#inputOrganizacion" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
+
 
 	</body>
 
