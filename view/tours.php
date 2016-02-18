@@ -54,7 +54,7 @@
 		<div class="row">
 		
 		<div class="col-md-3">
-			<div id="selectFecha" align="middle"></div>
+			<div id="selectFecha" align="middle" onchange="cambiaLog()"></div>
 		</div>
 
       		<div class="col-md-8" >

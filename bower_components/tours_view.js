@@ -42,8 +42,15 @@ function changeLog(){
 function statusChangeLog(resultado){
 
 	if (resultado.indexOf("<tr")==-1) {
-		//algo ocurrio mal
-		alert(resultado);
+		
+		if(!resultado){
+			alert("Conjunto vacio de datos");
+			$("#tbodyLog").empty();
+		}
+		else{
+			//algo ocurrio mal 
+			alert(resultado);
+		}
 	} 		 
 	else {
 		alert("LoadLog recuperado con EXITO!");
@@ -229,4 +236,11 @@ function statusUpdatedTour(resultado){
 		//here we must recharge the table
 	}
 
+}
+
+function cambiaLog(){
+	//alert($("#selectFecha").val());
+	if(tourHorarioIndex != -1){
+		changeLog();
+	}
 }
