@@ -66,6 +66,15 @@
 					  <fieldset>
 
 					    <!--<legend class="modal-title">Ingresa aqu&iacute; tus Reservaciones</legend>-->
+
+					    <div class="form-group">
+					      <label for="inputName" class="col-md-2 control-label-sm">Hotel/Operador</label>
+
+					        <div class="col-md-10">
+					        	<input type="text" class="form-control" id="inputName" placeholder="Nombre del Cliente">
+					    	</div>
+						</div>
+
 					   
 					    <div class="form-group">
 					      <label for="selectHotel" class="col-md-2 control-label-sm">Hotel/Operador</label>

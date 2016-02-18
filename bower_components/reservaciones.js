@@ -31,12 +31,11 @@ function algo(){
 function  saveReservacion(){
 
 	var result = verifyData();
-	alert("Hola");
 
 	if(result){
 	//the data
 	var data = {
-			cliente : "Jaime Rodriguez Cliente",
+			cliente : $("#inputName").val(),
 			habitacion : $("#inputHabitacion").val(),
 			procedencia : $("#selectProcedencia").val(),
 			id_hotel : $("#selectHotel").val(),
@@ -47,7 +46,7 @@ function  saveReservacion(){
 			ninios : $("#inputNi").val(),
 			insen : $("#inputIn").val()
 	}
-	alert("Adios");
+	
 	var message="info="+
 	         escape(JSON.stringify(data))
 
@@ -69,7 +68,7 @@ function statusSaveReserva(resultado){
 	} 		 
 	else {
 		alert("Reservacion Guardada!");
-		$("#formaReservacion").trigger("reset");
+		//$("#formaReservacion").trigger("reset");
 	}
 }
 

@@ -27,7 +27,7 @@
 			  echo $texto." No se pudo seleccionar la base de datos";
 		   }
 		   else {
-		       $sql="INSERT INTO reserva (cuenta_usuario, id_cliente, procedencia, id_tour, horario, clave_institucion, fecha, num_adultos, num_ninos, num_insen) VALUES('".$_SESSION['usuario']."',";
+		       $sql="INSERT INTO reserva (cuenta_usuario, id_cliente, procedencia, id_tour, horario, clave_institucion, fecha, num_adultos, num_ninos, num_insen, habitacion) VALUES('".$_SESSION['usuario']."',";
 		       $sql .= "'".$datos['cliente']."',";
 		       $sql .= "'".$datos['procedencia']."',";
 		   	   $sql .= "'".$datos['id_tour']."',";
@@ -36,7 +36,8 @@
 		   	   $sql .= "'".$datos['fecha']."',";
 		   	   $sql .= "'".$datos['adultos']."',";
 		   	   $sql .= "'".$datos['ninios']."',";
-               $sql .= "'".$datos['insen']."')";
+		   	   $sql .= "'".$datos['insen']."',";
+               $sql .= "".$datos['habitacion'].")";
 			   			  
 		       $result = mysqli_query($conn, $sql);
 				if ($result) {
