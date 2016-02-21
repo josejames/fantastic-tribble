@@ -189,7 +189,7 @@
 			include '../basics/scripts.php';
 		?>
 
-		<script type="text/javascript" src="../bower_components/tours_view.js"></script>
+		
 		<script>
 		  $.material.init();
 		</script>
