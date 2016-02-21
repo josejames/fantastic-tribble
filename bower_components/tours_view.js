@@ -73,58 +73,11 @@ function statusChangeLog(resultado){
 
 }
 
-/********************************************************/
-/* Function to retrieve the data from the hotel admin   */
-/*      form                                            */
-/********************************************************/
-function saveHorarioData() {
-
-
-	alert($("#inputTime").val());
-	/*var result = verifyData();
-	 
-	if(result){
-	//the data
-	var data = {
-			nombre : $("#inputNombre").val(),
-	}
-	//alert("Hola");
-	var message="info="+
-	         escape(JSON.stringify(data))
-
-	//the Ajax call
-	$.post("../controller/agregatour.php",message,
-	        statusSaveTour);
-	}
-	else{
-		$("#message").html("Debes Completar todos los campos :)");
-	}*/
-}
-
-/********************************************************/
-/* Function to recive the status of the inserted        */
-/* record in the institucion table in the db            */
-/********************************************************/
-function statusSaveTour(resultado){
-
-	if (resultado.indexOf("EXITO")==-1) {
-		//algo ocurrio mal
-		alert(resultado);
-	} 		 
-	else {
-		alert("Tour agregado con EXITO!");
-		loadTours();
-	}
-
-}
 
 /********************************************************/
 /* Function to verify the data from the hotel admi      */
 /*      form                                            */
 /********************************************************/
-function verifyData(){
-	return true;
-}
 
 function loadTours(){
 	//the Ajax call
@@ -161,82 +114,13 @@ function statusLoadTours(resultado){
 
 }
 
-/**************************************/
-/* Ccargar los datos del hotel dentro */
-/* del form de actualizar el registro */
-/*                                    */
-/**************************************/
-function modificarTour(){
-
-	alert("Usuario Index "+tourHorarioIndex);
-	//$('#thTable tr').children().css("background-color", "transparent");
-	$('#thTable tr').children().removeClass("success");
-	//tourHorarioIndex = null;
-	//MAkE THE AJAX CALL to get the hotel
-	var id_tour = tourHorarioIndex;
-	$.getJSON("../controller/obtentour.php","id_tour="+escape(id_tour),statusGetTour);
-	
-}
-
-/**/
-/*function getHotel() {
-	var id_hotel = $("#Peli").val();
-	$.getJSON("obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
-}*/
-
-function statusGetTour(datos){
-	
-	$("#inputID").val(datos.id_tour);
-	$("#inputNombre2").val(datos.nombre);
-	
-}
-
-
 /******************************************/
 /* Function */
 /**/
 /**/
 /*******************************************/
 
-function updateTour() {
 
-	var result = verifyData();
-
-	if(result){
-	//the data
-	var data = {
-			//inputs from the modal form
-			nombre : $("#inputNombre2").val(),
-			id_tour : $("#inputID").val()
-	}
-	//alert("Hola");
-	var message="info="+
-	         escape(JSON.stringify(data))
-
-	//the Ajax call
-	$.post("../controller/updatetour.php",message,
-	        statusUpdatedTour);
-	}
-	else{
-		$("#message").html("Debes Completar todos los campos :)");
-	}
-	
-}
-
-function statusUpdatedTour(resultado){
-
-	if (resultado.indexOf("EXITO")==-1) {
-		//algo ocurrio mal
-		alert(resultado);
-	} 		 
-	else {
-		alert("Tour Actualizado Con EXITO!");
-		$("#tbodyTours").empty();
-		loadTours();
-		//here we must recharge the table
-	}
-
-}
 
 function cambiaLog(){
 	//alert($("#selectFecha").val());
@@ -261,4 +145,20 @@ function generar(){
 	else{
 		alert("Primero debes elegir un Tour");
 	}
+}
+
+function generarReporteDia(){
+
+		alert("Hola");
+		var d = new Date();
+		alert(d.getDate());
+		alert("adios");
+		/*var datos = tourHorarioIndex.split(" ");
+		var id_tour = datos[0];
+		var horario = datos[1];
+
+		var url = '../controller/generarReporte.php?date='+ $("#selectFecha").val()+"&id="+id_tour+"&hora="+horario;
+		window.open(url,'GoogleWindow', 'width=800, height=600');*/
+		
+	
 }
