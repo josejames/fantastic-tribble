@@ -166,6 +166,7 @@
 					</div>
 					
 				</div><!--end container-->
+				<button type="button" class="btn btn-primary" onclick="generar()" >Reporte</button>
 			</div><!--end column -->
 		</div><!--end row-->
 
