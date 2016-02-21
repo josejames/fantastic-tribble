@@ -11,7 +11,7 @@
     //$mpdf->useDefaultCSS2 = true;
     
 
-    $mpdf->SetHeader('{DATE j-m-Y : :s}| Reporte de Operadora |{PAGENO}');
+    $mpdf->SetHeader('{DATE j-m-Y  h:i:s}| Reporte de Operadora |{PAGENO}');
     $mpdf->SetFooter('|Printed using mPDF|');
 
 
