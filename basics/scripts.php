@@ -6,6 +6,7 @@
   	<script src="../bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
   	<script type="text/javascript" src="../bower_components/operadora.js"></script>
 	<script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+	<script type="text/javascript" src="../bower_components/tours_view.js"></script>
 
 
 	<!--jqueryUI-->
