@@ -139,7 +139,7 @@ function generar(){
 		var horario = datos[1];
 
 		var url = '../controller/generarReporte.php?date='+ $("#selectFecha").val()+"&id="+id_tour+"&hora="+horario;
-		window.open(url,'GoogleWindow', 'width=800, height=600');
+		window.open(url,'Reporte', 'width=800, height=600');
 		
 	}
 	else{
@@ -149,16 +149,7 @@ function generar(){
 
 function generarReporteDia(){
 
-		alert("Hola");
-		var d = new Date();
-		alert(d.getDate());
-		alert("adios");
-		/*var datos = tourHorarioIndex.split(" ");
-		var id_tour = datos[0];
-		var horario = datos[1];
-
-		var url = '../controller/generarReporte.php?date='+ $("#selectFecha").val()+"&id="+id_tour+"&hora="+horario;
-		window.open(url,'GoogleWindow', 'width=800, height=600');*/
-		
+	var url = '../controller/generarReporteDia.php';
+	window.open(url,'Reporte', 'width=800, height=600');				
 	
 }

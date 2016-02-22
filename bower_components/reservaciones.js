@@ -68,11 +68,38 @@ function statusSaveReserva(resultado){
 	} 		 
 	else {
 		alert("Reservacion Guardada!");
-		//$("#formaReservacion").trigger("reset");
+	
 	}
 }
 
 
 function verifyData(){
+	
+	if (!$("#inputName").val()){
+		alert("Debes agregar un nombre de cliente");
+		return false;
+	}
+	if(!$("#inputHabitacion").val()){
+		alert("Debes colcar un numero de habitacion");
+		return false;
+	}
+	if($("#selectRecorrido").val() == -1){
+		alert("Debes seleccionar un recorrido valido");
+		return false;
+	}
+
 	return true;
+
+}
+
+function resetForm(){
+	$("#inputName").val("");
+	$("#inputHabitacion").val("");
+	$("#selectProcedencia")[0].selectedIndex = 0
+	$("#selectHotel")[0].selectedIndex = 0
+	//$("#selectProcedencia").val("");
+	//$("#selectHotel").val("");
+	$("#inputAd").val("");
+	$("#inputNi").val("");
+	$("#inputIn").val("");
 }

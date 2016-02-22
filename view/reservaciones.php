@@ -67,8 +67,8 @@
 
 					    <!--<legend class="modal-title">Ingresa aqu&iacute; tus Reservaciones</legend>-->
 
-					    <div class="form-group">
-					      <label for="inputName" class="col-md-2 control-label-sm">Hotel/Operador</label>
+					    <div class="form-group" id="clienteDiv">
+					      <label for="inputName" class="col-md-2 control-label-sm">Cliente</label>
 
 					        <div class="col-md-10">
 					        	<input type="text" class="form-control" id="inputName" placeholder="Nombre del Cliente">
@@ -253,7 +253,7 @@
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
 					        <button type="button" class="btn btn-primary" onclick="saveReservacion()">Guardar</button>
-					        <button type="button" class="btn btn-default">Nuevo</button>
+					        <button type="button" class="btn btn-default" onclick="resetForm()">Limpia</button>
 					      </div>
 					    </div>
 
