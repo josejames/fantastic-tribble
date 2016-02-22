@@ -68,7 +68,7 @@ function statusSaveReserva(resultado){
 	} 		 
 	else {
 		alert("Reservacion Guardada!");
-	
+		resetForm();
 	}
 }
 
