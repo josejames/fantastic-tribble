@@ -4,7 +4,7 @@
 $texto = "ERROR: ";
 
     //archivo de configuracion
-    include '../controller/config.php';
+    include 'config.php';
 
     $mysqli = new mysqli($hostdb, $usuariodb, $clavedb, $nombredb);
     //$conn = mysql_connect($hostdb, $usuariodb, $clavedb);
