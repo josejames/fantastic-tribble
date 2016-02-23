@@ -148,7 +148,7 @@
         		<div class="well bs-component">
 
         			<div style="overflow-y:scroll; height:250px;">
-	        			<table class="table table-striped table-hover ">
+	        			<table class="table table-striped table-hover " id="tableReserva">
 						  <thead>
 							  <tr>
 							    <th>Nombre</th>
@@ -166,6 +166,7 @@
 					</div>
 					
 				</div><!--end container-->
+				<button type="button" class="btn btn-default" onclick="eliminar()" >Eliminar</button>
 				<button type="button" class="btn btn-primary" onclick="generar()" >Reporte</button>
 			</div><!--end column -->
 		</div><!--end row-->
