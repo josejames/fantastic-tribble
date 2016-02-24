@@ -37,7 +37,7 @@
 
         //Consultar todos los tours, obtener todos los id de cada tour
         //Esta consulta carga los tours
-        $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
+        $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
 
         //$consulta_tour = "SELECT nombre_tour FROM tours WHERE id_tour=".$id_tour;
         
@@ -66,9 +66,17 @@
                     //se obtuvieron las reservas
                     //generamos la tabla
                     $mpdf->WriteHTML("<table width='100%' class='bpmTopnTail'>");
-                    $mpdf->WriteHTML("<thead><tr><th colspan='4'>");
-                    $mpdf->WriteHTML($fila[1]." ".$fila[2]);
-                    $mpdf->WriteHTML("</th></tr></thead>");
+                    $mpdf->WriteHTML("<thead><tr><th colspan='4' align='left'>");
+                    if ($fila[3] <= 9) {
+                        $fila[3] = "0".$fila[3];
+                    }
+                    $mpdf->WriteHTML($fila[3]." ".$fila[1]);
+                    $mpdf->WriteHTML("</th>");
+                    $mpdf->WriteHTML("<th align='right' colspan='3'>");
+                    $mpdf->WriteHTML($fila[2]);
+                    $mpdf->WriteHTML("</th>");
+                    $mpdf->WriteHTML("</tr></thead>");
+
 
                     $mpdf->WriteHTML("<tbody>");
                     $mpdf->WriteHTML("<tr> <th> No. Hab. </th>");

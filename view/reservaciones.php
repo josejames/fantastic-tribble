@@ -198,7 +198,7 @@
 							            exit();
 							        }
 
-							        $consulta = "SELECT id_tour, nombre_tour FROM tours";
+							        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
@@ -206,7 +206,7 @@
 							            while ($fila = $resultado->fetch_row()) {
 							        
 							                echo "<option value=".$fila[0].">\n";
-							                	echo "". ($fila[0] <= 9 ? "0".$fila[0] : $fila[0]) ."";
+							                	echo "". ($fila[2] <= 9 ? "0".$fila[2] : $fila[2]) ."";
 							                	echo " ".$fila[1]."";
 							                echo "</option>\n";
 							            }
