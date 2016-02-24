@@ -97,19 +97,19 @@
 							            exit();
 							        }
 
-							        $consulta = "SELECT id_tour, nombre_tour FROM tours";
+							        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
 							                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-							                if ($fila[0] < 9) {
-							                	$fila[0] = "0".$fila[0];
+							                if ($fila[2] < 9) {
+							                	$fila[2] = "0".$fila[2];
 							                }
-							                echo "<tr id=".$fila[0].">\n";
-							                	echo "<td>".$fila[0]."</td>\n";
-							                	echo "<td>".$fila[1]."</td>\n";
+							                echo "<tr id=".$fila[0].">\n"; //id
+							                	echo "<td>".$fila[2]."</td>\n"; //numero
+							                	echo "<td>".$fila[1]."</td>\n"; //nombre
 							                echo "<tr>\n";
 							            }
 
@@ -141,6 +141,14 @@
 					  <fieldset>
 
 					    <!--<legend class="modal-title">Ingresa aqu&iacute; tus Reservaciones</legend>-->
+
+					    <div class="form-group">
+					      <label for="inputNumero" class="col-md-2 control-label-sm">Numero</label>
+
+					      <div class="col-md-10">
+					        <input type="number" class="form-control" id="inputNumero" placeholder="Numero del tour" min="0">
+					      </div>
+					    </div>
 					   
 					    <div class="form-group">
 					      <label for="inputNombre" class="col-md-2 control-label-sm">Nombre</label>
@@ -162,7 +170,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="saveTourData()">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="saveTourData()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
@@ -207,6 +215,12 @@
 					      </div>
 					    </div>
 
+					    <div class="form-group">
+					      <!--<label for="inputID" class="col-md-2 control-label-sm">ID</label>-->
+					      <div class="col-md-2">
+					        <input type="hidden" class="form-control" id="inputIDHIDE" placeholder="ID del tour">
+					      </div>
+					    </div>
 
 					    <div class="form-group">
 					      <label for="inputNombre2" class="col-md-2 control-label-sm" >Nombre</label>
@@ -229,7 +243,7 @@
 		        <!--Content-->
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
 		      </div>
 		    </div>
 		  </div>

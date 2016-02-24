@@ -22,7 +22,7 @@ session_start();
             exit();
         }
 
-        $consulta = "SELECT id_tour, nombre_tour FROM tours WHERE id_tour='$id_tour'";
+        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours WHERE id_tour='$id_tour'";
 
         // Ver si la consulta ha resultado
         if ($resultado = $mysqli->query($consulta)) {
@@ -30,11 +30,12 @@ session_start();
             /* obtener el array de objetos */
             $fila = $resultado->fetch_row();
 
-            if ($fila[0] < 9) {
-	            $fila[0] = "0".$fila[0];
+            if ($fila[2] < 9) {
+	            $fila[2] = "0".$fila[2];
 	        }
                 //printf ("%s (%s)\n", $fila[0], $fila[1]);
                 $datos['id_tour'] = $fila[0];
+                $datos['numero'] = $fila[2];
                 $datos['nombre'] = $fila[1];
                 
                 header("Content-Type: application/json");

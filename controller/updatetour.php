@@ -28,6 +28,7 @@
 		   }
 		   else {
 		       $sql = "UPDATE tours SET nombre_tour='".$datos['nombre']."'";
+		       $sql.= ", numero_tour=".$datos['numero'];
 		       $sql .= " WHERE id_tour=".$datos['id_tour']."";
 		       //VALUES('".$datos['nombre']."',";
                //$sql .= "'".$datos['clave']."')";

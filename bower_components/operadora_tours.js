@@ -30,6 +30,7 @@ function saveTourData() {
 	//the data
 	var data = {
 			nombre : $("#inputNombre").val(),
+			numero : $("#inputNumero").val()
 	}
 	//alert("Hola");
 	var message="info="+
@@ -130,7 +131,8 @@ function modificarTour(){
 
 function statusGetTour(datos){
 	
-	$("#inputID").val(datos.id_tour);
+	$("#inputID").val(datos.numero);
+	$("#inputIDHIDE").val(datos.id_tour);
 	$("#inputNombre2").val(datos.nombre);
 	
 }
@@ -151,7 +153,8 @@ function updateTour() {
 	var data = {
 			//inputs from the modal form
 			nombre : $("#inputNombre2").val(),
-			id_tour : $("#inputID").val()
+			numero : $("#inputID").val(),
+			id_tour : $("#inputIDHIDE").val()
 	}
 	//alert("Hola");
 	var message="info="+

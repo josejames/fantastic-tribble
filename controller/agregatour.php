@@ -27,7 +27,7 @@
 			  echo $texto." No se pudo seleccionar la base de datos ";
 		   }
 		   else {
-		   	   $sql="INSERT INTO tours (nombre_tour) VALUES('".$datos['nombre']."')";
+		   	   $sql="INSERT INTO tours (nombre_tour, numero_tour) VALUES('".$datos['nombre']."',".$datos['numero'].")";
 		   	   /*$sql .= "'".$datos['pass']."',";
 		   	   $sql .= "'".$datos['nombre']."',";
 		   	   $sql .= "'".$datos['apPat']."',";

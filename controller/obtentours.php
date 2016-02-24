@@ -16,18 +16,18 @@
 	            exit();
 	        }
 
-	        $consulta = "SELECT id_tour, nombre_tour FROM tours";
+	        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
 
 	        if ($resultado = $mysqli->query($consulta)) {
 
 	            /* obtener el array de objetos */
 	            while ($fila = $resultado->fetch_row()) {
 	                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-	                if ($fila[0] < 9) {
-	                	$fila[0] = "0".$fila[0];
+	                if ($fila[2] < 9) {
+	                	$fila[2] = "0".$fila[2];
 	                }
 	                echo "<tr id=".$fila[0].">\n";
-	                	echo "<td>".$fila[0]."</td>\n";
+	                	echo "<td>".$fila[2]."</td>\n";
 	                	echo "<td>".$fila[1]."</td>\n";
 	                echo "<tr>\n";
 	            }
