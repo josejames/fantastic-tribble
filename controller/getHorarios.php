@@ -1,6 +1,6 @@
 <?php
 /* Object Oriented */
-// obtenusuario.php
+// GetHorarios para la forma de las reservaciones
 $texto = "ERROR: ";
 
 session_start();
