@@ -104,7 +104,7 @@
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
 							                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-							                if ($fila[2] < 9) {
+							                if ($fila[2] <= 9) {
 							                	$fila[2] = "0".$fila[2];
 							                }
 							                echo "<tr id=".$fila[0].">\n"; //id
