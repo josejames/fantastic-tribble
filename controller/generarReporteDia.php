@@ -18,7 +18,7 @@
     
     //set header and footer to the pdf
     $mpdf->SetHeader('{DATE j-m-Y  h:i:s}| Reporte de Operadora |{PAGENO}');
-    $mpdf->SetFooter('|Printed using mPDF|');
+    $mpdf->SetFooter('| Operadora Zacatecas |');
 
 
     $texto = "ERROR: ";
