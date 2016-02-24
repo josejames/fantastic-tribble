@@ -89,7 +89,7 @@ function statusLoadTours(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("loadHorarios recuperados con EXITO!");
+		//alert("loadHorarios recuperados con EXITO!");
 		//vaciamos la tabla
 		$("#tbodyHorarios").empty();
 		//rellenamos con la llamada ajax
@@ -107,4 +107,47 @@ function statusLoadTours(resultado){
 		tourIndex = -1;
 	}
 
+}
+
+/***********************************************/
+/******* Eliminar Registro de horarios *********/
+/***********************************************/
+/***********************************************/
+
+function eliminarHorario(){
+
+	if (tourIndex != -1) {
+		//MAkE THE AJAX CALL
+		var indice = tourIndex.split(" ");
+		//alert(indice[0]);
+		//alert(indice[1]);
+
+		var data = {
+			horario : indice[1],
+			id_tour : indice[0]
+		}
+	
+		var message="info="+
+	         escape(JSON.stringify(data))
+
+		//the Ajax call
+		$.post("../controller/eliminahorario.php",message,
+	        statusElimina);
+	}else{
+		alert("Para eliminar primero debes seleccionar un registro");
+	}
+}
+
+function statusElimina(resultado){
+	
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Horario removido!");
+		tourIndex = -1;
+		loadTours();
+		//here we must recharge the table
+	}
 }

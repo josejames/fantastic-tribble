@@ -93,7 +93,7 @@
 							        }
 
 							        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
-							        $consulta = 'select th.id_tour, t.nombre_tour, th.horario from tourhorario th, tours t WHERE th.id_tour = t.id_tour';
+							        $consulta = 'select th.id_tour, t.nombre_tour, th.horario, t.numero_tour from tourhorario th, tours t WHERE th.id_tour = t.id_tour';
 							        
 
 							        if ($resultado = $mysqli->query($consulta)) {
@@ -101,13 +101,13 @@
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
 							                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-							                if ($fila[0] <= 9) {
-							                	$fila[0] = "0".$fila[0];
+							                if ($fila[3] <= 9) {
+							                	$fila[3] = "0".$fila[3];
 							                }
-							                echo "<tr id=".$fila[0].">\n";
-							                	echo "<td>".$fila[0]."</td>\n";
-							                	echo "<td>".$fila[1]."</td>\n";
-							                	echo "<td>".$fila[2]."</td>\n";
+							                echo "<tr id='".$fila[0]." ".$fila[2]."'>\n"; //id
+							                	echo "<td>".$fila[3]."</td>\n"; //numero
+							                	echo "<td>".$fila[1]."</td>\n"; //nombre del tour
+							                	echo "<td>".$fila[2]."</td>\n"; //horario del tour
 							                echo "<tr>\n";
 							            }
 
@@ -121,7 +121,7 @@
 						 </tbody>
 						</table>
 					</div>
-					<button type="button" class="btn btn-primary">Eliminar</button>
+					<button type="button" class="btn btn-primary" onclick="eliminarHorario()">Eliminar</button>
 					<!--<button type="button" class="btn btn-primary" onclick="modificarTour()">Modificar</button>-->
 			  </div>
 			</div>
@@ -165,7 +165,7 @@
 							        }
 
 							      
-							        $consulta = 'SELECT id_tour, nombre_tour FROM tours';
+							        $consulta = 'SELECT id_tour, nombre_tour, numero_tour FROM tours';
 							        
 
 							        if ($resultado = $mysqli->query($consulta)) {
@@ -173,11 +173,11 @@
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
 							                //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-							                if ($fila[0] < 9) {
-							                	$fila[0] = "0".$fila[0];
+							                if ($fila[2] <= 9) {
+							                	$fila[2] = "0".$fila[2];
 							                }
-							                echo "<option id=".$fila[0]." value=".$fila[0].">\n";
-							                	echo "".$fila[0]." ".$fila[1]."\n";
+							                echo "<option id=".$fila[0]." value=".$fila[0].">\n"; //id and value
+							                	echo "".$fila[2]." ".$fila[1]."\n"; //numero y nombre
 											echo "</option>\n";
 							            }
 

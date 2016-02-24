@@ -17,7 +17,7 @@ $texto = "ERROR: ";
     }
 
     //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
-    $consulta = 'select th.id_tour, t.nombre_tour, th.horario from tourhorario th, tours t WHERE th.id_tour = t.id_tour';
+    $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
     
 
     if ($resultado = $mysqli->query($consulta)) {
@@ -25,13 +25,13 @@ $texto = "ERROR: ";
         /* obtener el array de objetos */
         while ($fila = $resultado->fetch_row()) {
             //printf ("%s (%s)\n", $fila[0], $fila[1]);							       
-            if ($fila[0] < 9) {
-            	$fila[0] = "0".$fila[0];
+            if ($fila[3] < 9) {
+            	$fila[3] = "0".$fila[3];
             }
-            echo "<tr id=".$fila[0].">\n";
-            	echo "<td>".$fila[0]."</td>\n";
-            	echo "<td>".$fila[1]."</td>\n";
-            	echo "<td>".$fila[2]."</td>\n";
+            echo "<tr id='".$fila[0]." ".$fila[2]."'>\n";
+            	echo "<td>".$fila[3]."</td>\n"; //numero de tour
+            	echo "<td>".$fila[1]."</td>\n"; //nombre de tour
+            	echo "<td>".$fila[2]."</td>\n"; //horario
             echo "<tr>\n";
         }
 
