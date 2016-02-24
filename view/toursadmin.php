@@ -97,7 +97,7 @@
 							            exit();
 							        }
 
-							        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
+							        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours ORDER BY numero_tour ASC";
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
