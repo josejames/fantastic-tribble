@@ -86,7 +86,7 @@ function statusLoadTours(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("loadTours recuperados con EXITO!");
+		//alert("loadTours recuperados con EXITO!");
 		//vaciamos la tabla
 		$("#tbodyTours").empty();
 		//rellenamos con la llamada ajax
@@ -183,4 +183,34 @@ function statusUpdatedTour(resultado){
 		//here we must recharge the table
 	}
 
+}
+
+/***********************************************/
+/******* Eliminar Registro de tours    *********/
+/***********************************************/
+/***********************************************/
+
+function eliminarTour(){
+
+	if (tourIndex != -1) {
+		//MAkE THE AJAX CALL
+		var indice = tourIndex;
+		$.post("../controller/eliminatour.php","indice="+escape(indice),statusElimina);
+	}else{
+		alert("Para eliminar primero debes seleccionar un registro");
+	}
+}
+
+function statusElimina(resultado){
+	
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Tour removido!");
+		tourIndex = -1;
+		loadTours();
+		//here we must recharge the table
+	}
 }

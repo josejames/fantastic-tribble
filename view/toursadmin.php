@@ -123,7 +123,7 @@
 						 </tbody>
 						</table>
 					</div>
-					<button type="button" class="btn btn-primary">Eliminar</button>
+					<button type="button" class="btn btn-primary" onclick="eliminarTour()">Eliminar</button>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog" onclick="modificarTour()">Modificar</button>
 			  </div>
 			</div>
