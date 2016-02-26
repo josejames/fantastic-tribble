@@ -1,10 +1,11 @@
 <?php
 
-
     /*********************************************************************/
-    /*Generar el reporte del dia, todos los tours                        */
+    /* Generar el reporte del dia, Seleccion de hora                     */
     /*                                                                   */
     /*********************************************************************/
+
+    $horario = $_GET['horario'];
     
     $table_header = "";
 
@@ -21,8 +22,7 @@
     $mpdf->SetFooter('|Operadora|');
     $mpdf->WriteHTML('<br/>');
 
-    $mpdf->WriteHTML('<p style="text-align:center; "><b>Reporte de Todos los Tours</b></p>');
-
+    $mpdf->WriteHTML('<p style="text-align:center; "><b>Reporte de Tours con horario '.$horario.'</b></p>');
 
     $texto = "ERROR: ";
 
@@ -38,14 +38,16 @@
             exit();
         }
 
-        //Consultar todos los tours, obtener todos los id de cada tour
+        /************************************************************/
+        /* CONSULTAR EL ID DE LOS TOURS CON EL HORARIO ESPECIFICADO */
+        /************************************************************/
         //Esta consulta carga los tours
-        $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
+        $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour AND th.horario=CAST('."'".$horario."' as TIME)";
 
         //$consulta_tour = "SELECT nombre_tour FROM tours WHERE id_tour=".$id_tour;
         
         if ($resultado = $mysqli->query($consulta)) {
-                                   
+            
             while($fila = $resultado->fetch_row()){
 
                 //Para cada tour y horario obtener TODAS sus reservas del DIA

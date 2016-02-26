@@ -14,9 +14,11 @@
     //$mpdf->useDefaultCSS2 = true;
     
     //set header and footer to the pdf
-    $mpdf->SetHeader('{DATE j-m-Y  h:i:s}| Reporte de Operadora |{PAGENO}');
-    $mpdf->SetFooter('|Printed using mPDF|');
+    $mpdf->SetHeader('{DATE j-m-Y  h:i:s}| <h5>Operadora Zacatecas S.A de C.V<h5> |{PAGENO}');
+    $mpdf->SetFooter('|Operadora|');
+    $mpdf->WriteHTML('<br/>');
 
+    $mpdf->WriteHTML('<p style="text-align:center; "><b>Reporte de Tour</b></p>');
 
     $texto = "ERROR: ";
 
@@ -32,21 +34,16 @@
             exit();
         }
 
-        $consulta_tour = "SELECT nombre_tour FROM tours WHERE id_tour=".$id_tour;
+        $consulta_tour = "SELECT nombre_tour, numero_tour FROM tours WHERE id_tour=".$id_tour;
         if ($res_nombre_tour = $mysqli->query($consulta_tour)) {
             $tour_name = $res_nombre_tour->fetch_row();
                 
-                $mpdf->WriteHTML('<p> </p>');
-                $mpdf->WriteHTML('<p> </p>');
-                $mpdf->WriteHTML('<div>');
+                if ($tour_name[1] <= 9) {
+                    $tour_name[1] = "0".$tour_name[1];
+                }
 
-                $table_header = $tour_name[0];
+                $table_header = $tour_name[1]." ".$tour_name[0];
                 //$mpdf->WriteHTML($table_header);
-                
-                $mpdf->WriteHTML('</div>');
-
-                $mpdf->WriteHTML('<p> </p>');
-                $mpdf->WriteHTML('<p> </p>');
         }
 
      
@@ -57,8 +54,8 @@
 
         if ($resultado = $mysqli->query($consulta)) {
 
-            $mpdf->WriteHTML("<table width='100%' class='bpmTopnTail'>");
-            $mpdf->WriteHTML("<thead><tr><th colspan='3'>");
+            $mpdf->WriteHTML("<table width='100%' border='1'>");
+            $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='7' align='left'>");
             $mpdf->WriteHTML($table_header);
             $mpdf->WriteHTML("</th></tr></thead>");
 

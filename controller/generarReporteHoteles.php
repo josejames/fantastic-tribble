@@ -16,13 +16,12 @@
     $mpdf->WriteHTML($stylesheet,1);
     //$mpdf->useDefaultCSS2 = true;
     
-    //set header and footer to the pdf
+   //set header and footer to the pdf
     $mpdf->SetHeader('{DATE j-m-Y  h:i:s}| <h5>Operadora Zacatecas S.A de C.V<h5> |{PAGENO}');
     $mpdf->SetFooter('|Operadora|');
     $mpdf->WriteHTML('<br/>');
 
-    $mpdf->WriteHTML('<p style="text-align:center; "><b>Reporte de Todos los Tours</b></p>');
-
+    $mpdf->WriteHTML('<p style="text-align:center; "><b>Reporte de Recolección</b></p>');
 
     $texto = "ERROR: ";
 
@@ -38,38 +37,35 @@
             exit();
         }
 
-        //Consultar todos los tours, obtener todos los id de cada tour
-        //Esta consulta carga los tours
-        $consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
-
-        //$consulta_tour = "SELECT nombre_tour FROM tours WHERE id_tour=".$id_tour;
+        //Consultar todos los hoteles activos en la base de datos
+        //Esta consulta carga la clave de los hoteles
+        //$consulta = 'SELECT th.id_tour, t.nombre_tour, th.horario, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour';
+        $consulta = 'SELECT clave_hotel, nombre_hotel FROM institucion';
         
         if ($resultado = $mysqli->query($consulta)) {
-                                   
+            
             while($fila = $resultado->fetch_row()){
 
-                //Para cada tour y horario obtener TODAS sus reservas del DIA
+                //Aqui ya se cargaron las claves de los hoteles
 
                 $fecha = date("Y-m-d");
-                //$mpdf->WriteHTML('<p>'.$fecha.'</   p>');
-               //$sql_reserva = 'SELECT r.id_reserva, r.id_cliente, r.clave_institucion, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen FROM reserva r WHERE r.id_tour = '.$fila[0]." AND r.horario = CAST('".$fila[2]."' as TIME) AND r.fecha = CAST('".date("d-m-Y")."' as DATE)";
+                //$mpdf->WriteHTML('<p>'.$fecha.' '.$fila[0].'</   p>');
+                //$sql_reserva = 'SELECT r.id_reserva, r.id_cliente, r.clave_institucion, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen FROM reserva r WHERE r.id_tour = '.$fila[0]." AND r.horario = CAST('".$fila[2]."' as TIME) AND r.fecha = CAST('".date("d-m-Y")."' as DATE)";
 
-                $sql_reserva = 'SELECT r.id_reserva, r.id_cliente, r.clave_institucion, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen FROM reserva r WHERE r.id_tour = '.$fila[0]." AND r.horario = CAST('".$fila[2]."' as TIME) AND r.fecha ='".$fecha."'";
+                $sql_reserva = "SELECT r.id_reserva, r.id_cliente, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen, r.id_tour, r.horario FROM reserva r WHERE r.clave_institucion='".$fila[0]."'";//." AND r.fecha ='".$fecha."'";
 
 
                 if ($res_reserva = $mysqli->query($sql_reserva)) {
                     //se obtuvieron las reservas
                     //generamos la tabla
                     $mpdf->WriteHTML("<table width='100%' border='1'>");
-                    $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='4' align='left'>");
-                    if ($fila[3] <= 9) {
-                        $fila[3] = "0".$fila[3];
-                    }
-                    $mpdf->WriteHTML($fila[3]." ".$fila[1]);
+                    $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='7' align='left'>");
+                
+                    $mpdf->WriteHTML($fila[1]);//nombre del hotel en header
                     $mpdf->WriteHTML("</th>");
-                    $mpdf->WriteHTML("<th align='right' colspan='3'>");
-                    $mpdf->WriteHTML($fila[2]);
-                    $mpdf->WriteHTML("</th>");
+                    //$mpdf->WriteHTML("<th align='right' colspan='3'>");
+                    //$mpdf->WriteHTML($fila[2]);
+                    //$mpdf->WriteHTML("</th>");
                     $mpdf->WriteHTML("</tr></thead>");
 
 
@@ -80,7 +76,7 @@
                     $mpdf->WriteHTML("<th> MENORES </th>");
                     $mpdf->WriteHTML("<th> INSEN </th>");
                     $mpdf->WriteHTML("<th> HORARIO </th>");
-                    $mpdf->WriteHTML("<th> HOTEL </th>");
+                    $mpdf->WriteHTML("<th> TOUR </th>");
                     $mpdf->WriteHTML("</tr>");
 
 
@@ -90,15 +86,16 @@
                         $data .= "<tr id=".$fila_reserva[0]." >\n";//id de la reserva
 
                             //columnas
-                            $data .= "<td>".$fila_reserva[3]."</td>\n";//Num Habitacion
+                            $data .= "<td>".$fila_reserva[2]."</td>\n";//Num Habitacion
                             $data .= "<td>".$fila_reserva[1]."</td>\n";//Nombre cliente
-                            $data .= "<td>".$fila_reserva[4]."</td>\n";//adultos
-                            $data .= "<td>".$fila_reserva[5]."</td>\n";//ninos
-                            $data .= "<td>".$fila_reserva[6]."</td>\n";//insen
-                            $data .= "<td>".$fila[2]."</td>\n";//horario
-
-
-                            $consulta_name = "SELECT i.nombre_hotel FROM institucion i WHERE i.clave_hotel = '".$fila_reserva[2]."'";
+                            $data .= "<td>".$fila_reserva[3]."</td>\n";//adultos
+                            $data .= "<td>".$fila_reserva[4]."</td>\n";//ninos
+                            $data .= "<td>".$fila_reserva[5]."</td>\n";//insen
+                            $data .= "<td>".$fila_reserva[7]."</td>\n";//HORARIO
+                            //$data .= "<td>".$fila_reserva[7]."</td>\n";//TOUR
+                            
+                            //obtener el numero del tour
+                            $consulta_name = "SELECT numero_tour FROM tours WHERE id_tour = '".$fila_reserva[6]."'";
                             
                             if ($resultado_name = $mysqli->query($consulta_name)) {
                                 $fila_name = $resultado_name->fetch_row();
