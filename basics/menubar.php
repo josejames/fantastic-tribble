@@ -18,7 +18,7 @@
 		            <li><a href="../view/reservaciones.php">Reservaciones</a></li>
 		            <li><a href="../view/tours.php">Revisar Tour</a></li>
 		            <li class="divider"></li>
-		            <li onclick="generarReporteDia()"><a href="javascript:void(0) ">Reporte de recolección</a></li>
+		            <li><a href="../view/reportes.php ">Reporte de recolección</a></li>
 		            <li class="divider"></li>
 		            <!--
 		            <li class="dropdown-header">Dropdown header</li>
