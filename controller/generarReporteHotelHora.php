@@ -2,10 +2,13 @@
 
 
     /*********************************************************************/
-    /*Generar el reporte del dia, todos los tours                        */
+    /*Generar el reporte de recoleccion del dia                          */
+    /*Con horario especifico                                             */
     /*                                                                   */
     /*********************************************************************/
     
+    $horario = $_GET['horario'];
+
     $table_header = "";
 
     include("../mpdf/mpdf.php");
@@ -52,21 +55,26 @@
                 //$mpdf->WriteHTML('<p>'.$fecha.' '.$fila[0].'</   p>');
                 //$sql_reserva = 'SELECT r.id_reserva, r.id_cliente, r.clave_institucion, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen FROM reserva r WHERE r.id_tour = '.$fila[0]." AND r.horario = CAST('".$fila[2]."' as TIME) AND r.fecha = CAST('".date("d-m-Y")."' as DATE)";
 
-                $sql_reserva = "SELECT r.id_reserva, r.id_cliente, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen, r.id_tour, r.horario FROM reserva r WHERE r.clave_institucion='".$fila[0]."' AND r.fecha ='".$fecha."'";
+                $sql_reserva = "SELECT r.id_reserva, r.id_cliente, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen, r.id_tour, r.horario FROM reserva r WHERE r.clave_institucion='".$fila[0]."' AND r.fecha ='".$fecha."' AND r.horario = CAST('".$horario."' as TIME)";
 
 
                 if ($res_reserva = $mysqli->query($sql_reserva)) {
-                    //se obtuvieron las reservas
 
+                    //obtenemos el conteo de filas
                     $row_cnt = $res_reserva->num_rows;
 
                     if($row_cnt != 0){
+                        //$mpdf->WriteHTML("<p>Esta tabla no debe salir</p>");    
+                        //se obtuvieron las reservas
                         //generamos la tabla
                         $mpdf->WriteHTML("<table width='100%' border='1'>");
                         $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='7' align='left'>");
                     
                         $mpdf->WriteHTML($fila[1]);//nombre del hotel en header
-                        $mpdf->WriteHTML("</th>");                        
+                        $mpdf->WriteHTML("</th>");
+                        //$mpdf->WriteHTML("<th align='right' colspan='3'>");
+                        //$mpdf->WriteHTML($fila[2]);
+                        //$mpdf->WriteHTML("</th>");
                         $mpdf->WriteHTML("</tr></thead>");
 
 
@@ -110,18 +118,18 @@
                         $mpdf->WriteHTML($data);
                         $data = "";
 
-                    }//end while llenado tabla tabla
+                    }//end while llenado de tabla
 
                     if($row_cnt != 0){
                         $mpdf->WriteHTML("</tbody>");
-                        $mpdf->WriteHTML("</table> <br /><br />");       
+                        $mpdf->WriteHTML("</table> <br /><br />");
                     }
 
                 }//end if reservas antes de tabla
                 else{
                     $mpdf->WriteHTML("No se obtubieron reservas");    
                 }
-                 
+                       
                 
             //$mpdf->WriteHTML("Continuar siguiente tour");
 
@@ -132,8 +140,6 @@
 
         /* cerrar la conexión */
         $mysqli->close();
-        //$mpdf->WriteHTML("</tbody>");
-        //$mpdf->WriteHTML("</table>");
 
         $mpdf->Output(); 
         exit;

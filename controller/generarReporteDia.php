@@ -59,30 +59,34 @@
 
                 if ($res_reserva = $mysqli->query($sql_reserva)) {
                     //se obtuvieron las reservas
-                    //generamos la tabla
-                    $mpdf->WriteHTML("<table width='100%' border='1'>");
-                    $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='4' align='left'>");
-                    if ($fila[3] <= 9) {
-                        $fila[3] = "0".$fila[3];
+
+                    $row_cnt = $res_reserva->num_rows;
+
+                    if($row_cnt != 0){
+                        //generamos la tabla
+                        $mpdf->WriteHTML("<table width='100%' border='1'>");
+                        $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='4' align='left'>");
+                        if ($fila[3] <= 9) {
+                            $fila[3] = "0".$fila[3];
+                        }
+                        $mpdf->WriteHTML($fila[3]." ".$fila[1]);
+                        $mpdf->WriteHTML("</th>");
+                        $mpdf->WriteHTML("<th align='right' colspan='3'>");
+                        $mpdf->WriteHTML($fila[2]);
+                        $mpdf->WriteHTML("</th>");
+                        $mpdf->WriteHTML("</tr></thead>");
+
+
+                        $mpdf->WriteHTML("<tbody>");
+                        $mpdf->WriteHTML("<tr> <th width='8%'>Hab.</th>");
+                        $mpdf->WriteHTML("<th width='25%'> CLIENTE </th>");
+                        $mpdf->WriteHTML("<th> ADULTOS </th>");
+                        $mpdf->WriteHTML("<th> MENORES </th>");
+                        $mpdf->WriteHTML("<th> INSEN </th>");
+                        $mpdf->WriteHTML("<th> HORARIO </th>");
+                        $mpdf->WriteHTML("<th> HOTEL </th>");
+                        $mpdf->WriteHTML("</tr>");
                     }
-                    $mpdf->WriteHTML($fila[3]." ".$fila[1]);
-                    $mpdf->WriteHTML("</th>");
-                    $mpdf->WriteHTML("<th align='right' colspan='3'>");
-                    $mpdf->WriteHTML($fila[2]);
-                    $mpdf->WriteHTML("</th>");
-                    $mpdf->WriteHTML("</tr></thead>");
-
-
-                    $mpdf->WriteHTML("<tbody>");
-                    $mpdf->WriteHTML("<tr> <th> No. Hab. </th>");
-                    $mpdf->WriteHTML("<th> CLIENTE </th>");
-                    $mpdf->WriteHTML("<th> ADULTOS </th>");
-                    $mpdf->WriteHTML("<th> MENORES </th>");
-                    $mpdf->WriteHTML("<th> INSEN </th>");
-                    $mpdf->WriteHTML("<th> HORARIO </th>");
-                    $mpdf->WriteHTML("<th> HOTEL </th>");
-                    $mpdf->WriteHTML("</tr>");
-
 
                     /* Para la tabla generada sacamos todas las filas de las reservas*/
                     while ($fila_reserva = $res_reserva->fetch_row()) {
@@ -112,14 +116,18 @@
                         $mpdf->WriteHTML($data);
                         $data = "";
 
-                    }//end while tabla
+                    }//end while llenado tabla
+
+                    if($row_cnt != 0){
+                        $mpdf->WriteHTML("</tbody>");
+                        $mpdf->WriteHTML("</table> <br />");        
+                    }
 
                 }//end if reservas antes de tabla
                 else{
                     $mpdf->WriteHTML("No se obtubieron reservas");    
                 }
-                $mpdf->WriteHTML("</tbody>");
-                $mpdf->WriteHTML("</table> <br /><br />");        
+                
                 
             //$mpdf->WriteHTML("Continuar siguiente tour");
 

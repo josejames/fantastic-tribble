@@ -62,7 +62,7 @@
 	      		<div class="col-md-8">
 	        		<div class="panel panel-default">
 	        			<div class="panel-heading">
-				    		<h3 class="panel-title">Reportes del d&iacute;a</h3>
+				    		<h3 class="panel-title">Reportes del d&iacute;a por Tours</h3>
 				  		</div>
 						<form class="form-horizontal">
 						  
@@ -150,7 +150,7 @@
 	      		<div class="col-md-8">
 	        		<div class="panel panel-default">
 	        			<div class="panel-heading">
-				    		<h3 class="panel-title">Reporte Recolecci&oacute;n por Hotel/Operador</h3>
+				    		<h3 class="panel-title">Reporte de Recolecci&oacute;n Hotel/Operador</h3>
 				  		</div>
 						<form class="form-horizontal">
 						  
@@ -160,15 +160,16 @@
 
 						   
 						    <div class="form-group">
-						      <label for="selectHotel" class="col-md-2 control-label-sm">Hotel/Operador</label>
+						      <label for="selectHotel" class="col-md-2 control-label-sm">Hora de Recorrido</label>
 
 						      <div class="col-md-8">
 						        <!--<input type="text" class="form-control" id="inputOrganizacion" placeholder="Hotel/Operador">-->
-						        <select id="selectHotel" class="form-control">
+						        <select id="selectHotelHora" class="form-control">
+						        	<option value="-1">Selecciona Hora</option>
 						        	<?php
-										/* Object Oriented */
-										// obtenTours.php
-										$texto = "ERROR: ";
+									/* Object Oriented */
+									// obtenTours.php
+									$texto = "ERROR: ";
 							
 								        //archivo de configuracion
 								        include '../controller/config.php';
@@ -183,15 +184,16 @@
 								            exit();
 								        }
 
-								        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
-								        $consulta = "SELECT clave_hotel, nombre_hotel FROM institucion";
-								        
+								        $consulta = "SELECT id_tour, horario FROM tourhorario GROUP BY horario";
 
 								        if ($resultado = $mysqli->query($consulta)) {
 
 								            /* obtener el array de objetos */
 								            while ($fila = $resultado->fetch_row()) {
-								            	echo '<option value="'.$fila[0].'">'.$fila[1]."     ".'</option>';
+								        
+								                echo "<option value=".$fila[1].">";								                	
+								                	echo " ".$fila[1]."";
+								                echo "</option>\n";
 								            }
 
 								            /* liberar el conjunto de resultados */
@@ -199,7 +201,8 @@
 								        }
 								        /* cerrar la conexión */
 								        $mysqli->close();
-									?>
+							?>
+						        	
 						        </select>
 						      </div>
 						    </div>
@@ -208,7 +211,7 @@
 						      <div class="col-md-offset-2 col-md-10">
 						        <div class="checkbox">
 						          <label>
-						            <input type="checkbox"> Todos los Hoteles/Operadores
+						            <input type="checkbox" id="checkHora"> Todos las Horas
 						          </label>						          
 						        </div>
 						      </div>
@@ -216,7 +219,7 @@
 
 						    <div class="form-group">
 						      <div class="col-md-10 col-md-offset-2">
-						        <button type="button" class="btn btn-primary" onclick="generarReporteHoteles()">Generar</button>						       
+						        <button type="button" class="btn btn-primary" onclick="generarReportesH()">Generar</button>						       
 						      </div>
 						    </div>
 

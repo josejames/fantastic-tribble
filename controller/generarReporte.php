@@ -60,8 +60,8 @@
             $mpdf->WriteHTML("</th></tr></thead>");
 
             $mpdf->WriteHTML("<tbody>");
-            $mpdf->WriteHTML("<tr> <th> No. Hab. </th>");
-            $mpdf->WriteHTML("<th> CLIENTE </th>");
+            $mpdf->WriteHTML("<tr> <th width='8%'>Hab.</th>");
+            $mpdf->WriteHTML("<th width='25%'> CLIENTE </th>");
             $mpdf->WriteHTML("<th> ADULTOS </th>");
             $mpdf->WriteHTML("<th> MENORES </th>");
             $mpdf->WriteHTML("<th> INSEN </th>");
@@ -91,21 +91,40 @@
                         $data .= "<td>".$fila_name[0]."</td>\n";//Nombre Hotel
                     }else{
                         $data .= "<td>".$fila[2]."</td>\n";//Clave Hotel
-                    }
-                    
+                    }                    
                     
                 $data .= "</tr>\n";
                 $mpdf->WriteHTML($data);
                 $data = "";
-            }
+            }//end while llenado de tabla
 
+            $sql_num = 'SELECT  SUM(r.num_adultos), SUM(r.num_ninos), SUM(r.num_insen) FROM reserva r WHERE r.id_tour = '.$id_tour." AND r.horario = CAST('".$horario."' as TIME) AND r.fecha = CAST('".$date."' as DATE)";
+
+            if ($res_num = $mysqli->query($sql_num)) {
+                //obtenemos la suma de los numeros
+                $numeros = $res_num->fetch_row();
+                $mpdf->WriteHTML("<tr>");
+                $mpdf->WriteHTML("<td colspan='2'>Cantidad de Personas</td>");
+                $mpdf->WriteHTML("<td>".$numeros[0]."</td>");
+                $mpdf->WriteHTML("<td>".$numeros[1]."</td>");
+                $mpdf->WriteHTML("<td>".$numeros[2]."</td>");
+
+                $total = $numeros[0]+$numeros[1]+$numeros[2];
+                $mpdf->WriteHTML("<td colspan='2'> Total = ".$total."</td>");
+                $mpdf->WriteHTML("</tr>");
+
+            }
+            //$mpdf->WriteHTML("<tr><th>".$fila[7]."</th></tr>");
+            //cerramos la tabla
+            $mpdf->WriteHTML("</tbody>");
+            $mpdf->WriteHTML("</table>");
+            
             /* liberar el conjunto de resultados */
             $resultado->close();
         }
         /* cerrar la conexión */
         $mysqli->close();
-        $mpdf->WriteHTML("</tbody>");
-        $mpdf->WriteHTML("</table>");
+       
 
         $mpdf->Output(); 
         exit;
