@@ -245,6 +245,7 @@ function statusEliminaUsuario(resultado){
 		alert("Usuario eliminado!");
 		//$("#tbodyUsuario").empty();
 		loadUsuarios();
+		usuarioIndex = -1;
 		//here we must recharge the table
 	}	
 
