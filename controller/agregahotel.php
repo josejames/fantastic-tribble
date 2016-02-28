@@ -25,17 +25,17 @@
 	       //select the database
 		   if ( !mysqli_select_db($conn, $nombredb) ) {
 			  echo $texto." No se pudo seleccionar la base de datos";
-		   }
+		   }//$upper_data = strtoupper($_POST['textbox']);
 		   else {
 		       $sql="INSERT INTO institucion VALUES('".$datos['nombre']."',";
-               $sql .= "'".$datos['clave']."')";
+               $sql .= "'".strtoupper($datos['clave'])."')";
 			   			  
 		       $result = mysqli_query($conn, $sql);
 				if ($result) {
 					echo  "EXITO";
 				}
 				else {
-					echo $texto." No se pudo insertar";
+					echo $texto." No se pudo insertar ".mysqli_error($conn);;
 				}
 		   }
 	   }//else se conecto
