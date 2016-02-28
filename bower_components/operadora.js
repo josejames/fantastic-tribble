@@ -1,4 +1,4 @@
-var hotelIndex;
+var hotelIndex = -1;
 
 /***********************************/
 /* Archivo de Script para procesar */
@@ -7,8 +7,8 @@ var hotelIndex;
 /* version 1.0                     */
 /***********************************/
 $(document).ready(function () {      
-     $('#resultTable tr').click(function (event) {
-     	  $('#resultTable tr').children().removeClass("success");
+     $('#tbodyHotel tr').click(function (event) {
+     	  $('#tbodyHotel tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
           //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           $(this).children().addClass("success");
@@ -54,10 +54,15 @@ function statusSaveHotel(resultado){
 
 	if (resultado.indexOf("EXITO")==-1) {
 		//algo ocurrio mal
-		alert(resultado);
+		if (resultado.indexOf("Duplicate")!=-1) {
+			alert("La clave de hotel "+$("#inputClave").val().toUpperCase()+" ya existe");
+		} else{
+			alert(resultado);
+		}
 	} 		 
 	else {
 		alert("Hotel agregado con EXITO!");
+		loadHoteles();
 	}
 
 }
@@ -85,12 +90,12 @@ function statusLoadHoteles(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("loadHoteles recuperados con EXITO!");
+		//alert("loadHoteles recuperados con EXITO!");
 		$("#tbodyHotel").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		    $('#resultTable tr').click(function (event) {
-     		$('#resultTable tr').children().removeClass("success");
+ 		    $('#tbodyHotel tr').click(function (event) {
+     		$('#tbodyHotel tr').children().removeClass("success");
           	//alert($(this).attr('id')); //trying to alert id of the clicked row
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
@@ -109,9 +114,9 @@ function statusLoadHoteles(resultado){
 /**************************************/
 function modificarHotel(){
 
-	alert("Hotel Index "+hotelIndex);
-	//$('#resultTable tr').children().css("background-color", "transparent");
-	$('#resultTable tr').children().removeClass("success");
+	//alert("Hotel Index "+hotelIndex);
+	//$('#tbodyHotel tr').children().css("background-color", "transparent");
+	$('#tbodyHotel tr').children().removeClass("success");
 	//hotelIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
 	var id_hotel = hotelIndex;
@@ -144,7 +149,7 @@ function updateHotel() {
 
 	var result = verifyData();
 
-	if(result){
+	if(result && hotelIndex != -1){
 	//the data
 	var data = {
 			//inputs from the modal form
@@ -180,8 +185,29 @@ function statusUpdatedHotel(resultado){
 
 }
 
-function eliminar(){
-	alert("Hola");
-	$("#tbodyHotel").empty();
-	alert("Adios");
+function eliminarHotel(){
+if (hotelIndex != -1) {
+		//
+		if(confirm("Seguro de eliminar "+hotelIndex+"?"))
+			{
+			    var id_hotel = hotelIndex;
+				$.post("../controller/eliminahotel.php","id_hotel="+escape(id_hotel),statusEliminaHotel);
+			}			
+	}
+
+}
+function statusEliminaHotel(resultado){
+
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Hotel eliminado!");
+		//$("#tbodyUsuario").empty();
+		loadHoteles();
+		hotelIndex = -1;
+		//here we must recharge the table
+	}	
+
 }

@@ -123,7 +123,7 @@
 						 </tbody>
 						</table>
 					</div>
-					<button type="button" class="btn btn-primary" onclick="eliminar()">Eliminar</button>
+					<button type="button" class="btn btn-primary" onclick="eliminarHotel()">Eliminar</button>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog" onclick="modificarHotel()">Modificar</button>
 			  </div>
 			</div>
@@ -157,17 +157,7 @@
 					        <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
 					      </div>
 
-					    </div>
-					    
-					    <div class="form-group">
-					      <label for="inputPassword" class="col-md-2 control-label-sm">Password</label>
-
-					      <div class="col-md-10">
-					        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-					      </div>
-					    </div>
-
-					    
+					    </div>					    					  
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
@@ -242,7 +232,7 @@
 		        <!--Content-->
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
 		      </div>
 		    </div>
 		  </div>
