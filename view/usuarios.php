@@ -129,7 +129,7 @@
 						 </tbody>
 						</table>
 					</div>
-					<button type="button" class="btn btn-primary">Eliminar</button>
+					<button type="button" class="btn btn-primary" onclick="eliminarUsuario()">Eliminar</button>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#complete-dialog" onclick="modificarUsuario()">Modificar</button>
 			  </div>
 			</div>
@@ -142,7 +142,7 @@
 			    		<h3 class="panel-title">Datos de usuario</h3>
 			  		</div>
 			  	<div class="panel-body">
-        			<form class="form-horizontal" action="#">
+        			<form class="form-horizontal" action="#" id="formUsuario">
 					  
 					  <fieldset>
 
@@ -251,7 +251,7 @@
 					      <label for="inputCuenta2" class="col-md-2 control-label-sm">Cuenta</label>
 
 					      <div class="col-md-10">
-					        <input type="text" class="form-control" id="inputCuenta2" placeholder="Cuenta">
+					        <input type="text" class="form-control" id="inputCuenta2" placeholder="Cuenta" readonly="true">
 					      </div>
 					    </div>
 
@@ -300,7 +300,7 @@
 		        <!--Content-->
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
 		      </div>
 		    </div>
 		  </div>

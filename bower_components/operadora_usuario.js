@@ -7,8 +7,8 @@ var usuarioIndex = -1;
 /* version 1.0                     */
 /***********************************/
 $(document).ready(function () {      
-     $('#usuarioTable tr').click(function (event) {
-     	  $('#usuarioTable tr').children().removeClass("success");
+     $('#tbodyUsuario tr').click(function (event) {
+     	  $('#tbodyUsuario tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
           //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           $(this).children().addClass("success");
@@ -67,10 +67,15 @@ function statusSaveUsuario(resultado){
 
 	if (resultado.indexOf("EXITO")==-1) {
 		//algo ocurrio mal
-		alert(resultado);
+		if(resultado.indexOf("Duplicate")!=-1){
+			alert("La cuenta "+$("#inputCuenta").val()+" ya existe");
+		}else{
+			alert(resultado);
+		}
 	} 		 
 	else {
 		alert("Usuario agregado con EXITO!");
+		$("#formUsuario").trigger("reset");
 		loadUsuarios();
 	}
 
@@ -99,15 +104,15 @@ function statusLoadUsuarios(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("loadUsuarios recuperados con EXITO!");
+		//alert("loadUsuarios recuperados con EXITO!");
 		//vaciamos la tabla
 		$("#tbodyUsuario").empty();
 		//rellenamos con la llamada ajax
 		$("#tbodyUsuario").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		    $('#usuarioTable tr').click(function (event) {
-     		$('#usuarioTable tr').children().removeClass("success");
+ 		    $('#tbodyUsuario tr').click(function (event) {
+     		$('#tbodyUsuario tr').children().removeClass("success");
           	//alert($(this).attr('id')); //trying to alert id of the clicked row
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
@@ -120,19 +125,22 @@ function statusLoadUsuarios(resultado){
 }
 
 /**************************************/
-/* Ccargar los datos del hotel dentro */
-/* del form de actualizar el registro */
+/* Funcion que carga el usuario       */
+/* en el form modal para modificar    */
 /*                                    */
 /**************************************/
 function modificarUsuario(){
 
-	alert("Usuario Index "+usuarioIndex);
-	//$('#usuarioTable tr').children().css("background-color", "transparent");
-	$('#usuarioTable tr').children().removeClass("success");
+	//alert("Usuario Index "+usuarioIndex);
+	//$('#tbodyUsuario tr').children().css("background-color", "transparent");
+	$('#tbodyUsuario tr').children().removeClass("success");
 	//usuarioIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
-	var id_usuario = usuarioIndex;
-	$.getJSON("../controller/obtenusuario.php","id_usuario="+escape(id_usuario),statusGetUsuario);
+
+	if (usuarioIndex != "admin"){
+		var id_usuario = usuarioIndex;
+		$.getJSON("../controller/obtenusuario.php","id_usuario="+escape(id_usuario),statusGetUsuario);
+	}
 	
 }
 
@@ -212,5 +220,32 @@ function statusUpdatedUsuario(resultado){
 		loadUsuarios();
 		//here we must recharge the table
 	}
+
+}
+
+function eliminarUsuario(){
+
+	if (usuarioIndex != -1 && usuarioIndex != "admin") {
+		//
+		if(confirm("Seguro de eliminar "+usuarioIndex+"?"))
+			{
+			    var id_usuario = usuarioIndex;
+				$.post("../controller/eliminausuario.php","id_usuario="+escape(id_usuario),statusEliminaUsuario);
+			}			
+	}
+
+}
+function statusEliminaUsuario(resultado){
+
+	if (resultado.indexOf("EXITO")==-1) {
+		//algo ocurrio mal
+		alert(resultado);
+	} 		 
+	else {
+		alert("Usuario eliminado!");
+		//$("#tbodyUsuario").empty();
+		loadUsuarios();
+		//here we must recharge the table
+	}	
 
 }
