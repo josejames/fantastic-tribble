@@ -79,7 +79,7 @@
 					    <div class="form-group">
 					      <label for="selectHotel" class="col-md-2 control-label-sm">Hotel/Operador</label>
 
-					      <div class="col-md-10">
+					      <div class="col-md-8">
 					        <!--<input type="text" class="form-control" id="inputOrganizacion" placeholder="Hotel/Operador">-->
 					        <select id="selectHotel" class="form-control">
 					        	<?php
@@ -101,14 +101,14 @@
 							        }
 
 							        //$consulta = "SELECT id_tour, nombre_tour, horario FROM tourhorario, tours WHERE tours.id_tour = tourhorario.id_tour GROUP BY id_tour";
-							        $consulta = "SELECT clave_hotel FROM institucion";
+							        $consulta = "SELECT clave_hotel, nombre_hotel FROM institucion";
 							        
 
 							        if ($resultado = $mysqli->query($consulta)) {
 
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
-							            	echo '<option value="'.$fila[0].'">'.$fila[0]."     ".'</option>';
+							            	echo '<option value="'.$fila[0].'">'.$fila[0]." ".$fila[1].'</option>';
 							            }
 
 							            /* liberar el conjunto de resultados */
@@ -177,7 +177,7 @@
 					    <div class="form-group">
 					      <label for="selectRecorrido" class="col-md-2 control-label-sm">Recorrido</label>
 
-					      <div class="col-md-8">
+					      <div class="col-md-6">
 					        <select id="selectRecorrido" class="form-control" onchange="cargaHorarios()">
 					        	<option value="-1">Selecciona Tour</option>
 					         <?php
