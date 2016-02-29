@@ -62,6 +62,7 @@ function statusSaveHotel(resultado){
 	} 		 
 	else {
 		alert("Hotel agregado con EXITO!");
+		$("#formHotel").trigger("reset");
 		loadHoteles();
 	}
 

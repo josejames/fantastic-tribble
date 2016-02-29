@@ -136,7 +136,7 @@
 			    		<h3 class="panel-title">Datos de Hotel / Operador</h3>
 			  		</div>
 			  	<div class="panel-body">
-        			<form class="form-horizontal" action="#">
+        			<form class="form-horizontal" id="formHotel">
 					  
 					  <fieldset>
 
@@ -161,7 +161,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="savetHotelData()">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="savetHotelData()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
