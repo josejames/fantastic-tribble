@@ -243,7 +243,7 @@
 		      </div>
 		      <div class="modal-body">
 		        <!--Content-->
-		        <form class="form-horizontal" action="#">
+		        <form class="form-horizontal">
 					  
 					  <fieldset>
 
@@ -289,7 +289,7 @@
 
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="updateUsuario()">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="updateUsuario()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
