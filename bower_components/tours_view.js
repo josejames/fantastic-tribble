@@ -75,12 +75,13 @@ function statusChangeLog(resultado){
 		$("#tbodyLog").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		     $('#tbodyLog tr').click(function (event) {
+ 		    $('#tbodyLog tr').click(function (event) {
      	  	$('#tbodyLog tr').children().removeClass("danger");
           	$(this).children().addClass("danger");
           	reservaIndex = this.id;
          
-     });
+     		});
+     	reservaIndex = -1;
 	}
 
 }
@@ -150,7 +151,7 @@ function generar(){
 		
 	}
 	else{
-		alert("Primero debes elegir un Tour");
+		//alert("Primero debes elegir un Tour");
 	}
 }
 
@@ -165,8 +166,11 @@ function eliminar(){
 
 	if (reservaIndex != -1) {
 		//MAkE THE AJAX CALL
-		var indice = reservaIndex;
-		$.post("../controller/eliminaregistro.php","id_reserva="+escape(indice),statusElimina);
+		if(confirm("Seguro de cancelar la reserva?"))
+			{
+				var indice = reservaIndex;
+				$.post("../controller/eliminaregistro.php","id_reserva="+escape(indice),statusElimina);
+			}
 	}else{
 		alert("Para eliminar primero debes seleccionar un registro");
 	}
