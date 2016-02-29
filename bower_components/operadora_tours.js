@@ -58,6 +58,7 @@ function statusSaveTour(resultado){
 	} 		 
 	else {
 		alert("Tour agregado con EXITO!");
+		$("#formTours").trigger("reset");
 		loadTours();
 	}
 
@@ -113,13 +114,19 @@ function statusLoadTours(resultado){
 /**************************************/
 function modificarTour(){
 
-	alert("Usuario Index "+tourIndex);
+	//alert("Usuario Index "+tourIndex);
 	//$('#toursTable tr').children().css("background-color", "transparent");
 	$('#toursTable tr').children().removeClass("success");
 	//tourIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
-	var id_tour = tourIndex;
-	$.getJSON("../controller/obtentour.php","id_tour="+escape(id_tour),statusGetTour);
+	if (tourIndex != -1) {
+		var id_tour = tourIndex;
+		$.getJSON("../controller/obtentour.php","id_tour="+escape(id_tour),statusGetTour);
+	} else{
+		$("#inputID").val("");
+		$("#inputIDHIDE").val("");
+		$("#inputNombre2").val("");	
+	}
 	
 }
 
@@ -134,7 +141,7 @@ function statusGetTour(datos){
 	$("#inputID").val(datos.numero);
 	$("#inputIDHIDE").val(datos.id_tour);
 	$("#inputNombre2").val(datos.nombre);
-	
+	tourIndex = -1;
 }
 
 
@@ -194,10 +201,13 @@ function eliminarTour(){
 
 	if (tourIndex != -1) {
 		//MAkE THE AJAX CALL
-		var indice = tourIndex;
-		$.post("../controller/eliminatour.php","indice="+escape(indice),statusElimina);
+		if(confirm("Seguro de eliminar el Tour?"))
+			{
+				var indice = tourIndex;
+				$.post("../controller/eliminatour.php","indice="+escape(indice),statusElimina);
+			}
 	}else{
-		alert("Para eliminar primero debes seleccionar un registro");
+		//alert("Para eliminar primero debes seleccionar un registro");
 	}
 }
 

@@ -136,7 +136,7 @@
 			    		<h3 class="panel-title">Datos del Tour</h3>
 			  		</div>
 			  	<div class="panel-body">
-        			<form class="form-horizontal">
+        			<form class="form-horizontal" id="formTours">
 					  
 					  <fieldset>
 
@@ -202,7 +202,7 @@
 		      </div>
 		      <div class="modal-body">
 		        <!--Content-->
-		        <form class="form-horizontal" action="#">
+		        <form class="form-horizontal">
 					  
 					  <fieldset>
 
@@ -232,7 +232,7 @@
 					  	
 					    <div class="form-group">
 					      <div class="col-md-10 col-md-offset-2">
-					        <button type="submit" class="btn btn-primary" onclick="updateTour()">Guardar</button>
+					        <button type="button" class="btn btn-primary" onclick="updateTour()">Guardar</button>
 					        <!--<button type="button" class="btn btn-default">Nuevo</button>-->
 					      </div>
 					    </div>
