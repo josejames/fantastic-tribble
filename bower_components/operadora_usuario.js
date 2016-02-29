@@ -131,15 +131,13 @@ function statusLoadUsuarios(resultado){
 /**************************************/
 function modificarUsuario(){
 
-	//alert("Usuario Index "+usuarioIndex);
-	//$('#tbodyUsuario tr').children().css("background-color", "transparent");
-	$('#tbodyUsuario tr').children().removeClass("success");
-	//usuarioIndex = null;
-	//MAkE THE AJAX CALL to get the hotel
+	//MAkE THE AJAX CALL to get the user
 
-	if (usuarioIndex != "admin"){
-		var id_usuario = usuarioIndex;
-		$.getJSON("../controller/obtenusuario.php","id_usuario="+escape(id_usuario),statusGetUsuario);
+	if (usuarioIndex != -1) {//hay un usuario seleccionado
+		if (usuarioIndex != "admin" ){//aparte no es admin
+			var id_usuario = usuarioIndex;
+			$.getJSON("../controller/obtenusuario.php","id_usuario="+escape(id_usuario),statusGetUsuario);
+		}
 	}
 	
 }
@@ -184,7 +182,7 @@ function updateUsuario() {
         isAdmin = 2;
     }
 
-	if(result){
+	if(result && usuarioIndex != -1 && usuarioIndex != "admin"){
 	//the data
 	var data = {
 			//inputs from the modal form

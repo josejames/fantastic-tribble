@@ -1,4 +1,5 @@
 var tourIndex = -1;
+var modalCargado = -1;
 
 /***********************************/
 /* Archivo de Script para procesar */
@@ -108,16 +109,12 @@ function statusLoadTours(resultado){
 }
 
 /**************************************/
-/* Ccargar los datos del hotel dentro */
+/* Ccargar los datos del tour  dentro */
 /* del form de actualizar el registro */
 /*                                    */
 /**************************************/
 function modificarTour(){
 
-	//alert("Usuario Index "+tourIndex);
-	//$('#tbodyTours tr').children().css("background-color", "transparent");
-	$('#tbodyTours tr').children().removeClass("success");
-	//tourIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
 	if (tourIndex != -1) {
 		var id_tour = tourIndex;
@@ -141,7 +138,7 @@ function statusGetTour(datos){
 	$("#inputID").val(datos.numero);
 	$("#inputIDHIDE").val(datos.id_tour);
 	$("#inputNombre2").val(datos.nombre);
-	tourIndex = -1;
+	
 }
 
 
@@ -155,7 +152,7 @@ function updateTour() {
 
 	var result = verifyData();
 
-	if(result){
+	if(result && tourIndex != -1){
 	//the data
 	var data = {
 			//inputs from the modal form

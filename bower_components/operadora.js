@@ -1,4 +1,5 @@
 var hotelIndex = -1;
+var modificado = -1;
 
 /***********************************/
 /* Archivo de Script para procesar */
@@ -101,9 +102,11 @@ function statusLoadHoteles(resultado){
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
           	hotelIndex = this.id;
-          
+          	
 			});
-		
+		if (modificado = 1) {
+			hotelIndex = -1;
+		}
 	}
 
 }
@@ -117,12 +120,16 @@ function modificarHotel(){
 
 	//alert("Hotel Index "+hotelIndex);
 	//$('#tbodyHotel tr').children().css("background-color", "transparent");
-	$('#tbodyHotel tr').children().removeClass("success");
+	//$('#tbodyHotel tr').children().removeClass("success");
 	//hotelIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
-	var id_hotel = hotelIndex;
-	$.getJSON("../controller/obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
-	
+	if (hotelIndex != -1) {
+		var id_hotel = hotelIndex;
+		$.getJSON("../controller/obtenhotel.php","id_hotel="+escape(id_hotel),statusGetHotel);
+	}else{
+		$("#inputNombre2").val("");
+		$("#inputClave2").val("");
+	}
 }
 
 /**/
@@ -134,9 +141,9 @@ function modificarHotel(){
 function statusGetHotel(datos){
 	
 	$("#inputNombre2").val(datos.nombre_hotel);
-	$("#inputClave2").val(datos.clave)
-
-
+	$("#inputClave2").val(datos.clave);
+	//hotelIndex = -1;
+	//$("#hotelIndex").children().addClass("success");
 }
 
 
@@ -176,10 +183,14 @@ function statusUpdatedHotel(resultado){
 	if (resultado.indexOf("EXITO")==-1) {
 		//algo ocurrio mal
 		alert(resultado);
+		modificado = -1;
 	} 		 
 	else {
 		alert("Hotel Actualizado Con EXITO!");
+		//we save the old index to refer after the update
+		
 		$("#tbodyHotel").empty();
+		modificado = 1;
 		loadHoteles();
 		//here we must recharge the table
 	}
