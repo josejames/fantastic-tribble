@@ -7,8 +7,8 @@ var tourIndex = -1;
 /* version 1.0                     */
 /***********************************/
 $(document).ready(function () {      
-     $('#toursTable tr').click(function (event) {
-     	  $('#toursTable tr').children().removeClass("success");
+     $('#tbodyTours tr').click(function (event) {
+     	  $('#tbodyTours tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
           //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           $(this).children().addClass("success");
@@ -94,8 +94,8 @@ function statusLoadTours(resultado){
 		$("#tbodyTours").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		    $('#toursTable tr').click(function (event) {
-     		$('#toursTable tr').children().removeClass("success");
+ 		    $('#tbodyTours tr').click(function (event) {
+     		$('#tbodyTours tr').children().removeClass("success");
           	//alert($(this).attr('id')); //trying to alert id of the clicked row
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
@@ -115,8 +115,8 @@ function statusLoadTours(resultado){
 function modificarTour(){
 
 	//alert("Usuario Index "+tourIndex);
-	//$('#toursTable tr').children().css("background-color", "transparent");
-	$('#toursTable tr').children().removeClass("success");
+	//$('#tbodyTours tr').children().css("background-color", "transparent");
+	$('#tbodyTours tr').children().removeClass("success");
 	//tourIndex = null;
 	//MAkE THE AJAX CALL to get the hotel
 	if (tourIndex != -1) {
