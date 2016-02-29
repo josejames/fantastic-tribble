@@ -134,7 +134,7 @@
 			    		<h3 class="panel-title">Datos del Tour</h3>
 			  		</div>
 			  	<div class="panel-body">
-        			<form class="form-horizontal">
+        			<form class="form-horizontal" id="formHorariosTour">
 					  
 					  <fieldset>
 

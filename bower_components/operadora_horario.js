@@ -7,8 +7,8 @@ var tourIndex = -1;
 /* version 1.0                     */
 /***********************************/
 $(document).ready(function () {      
-     $('#horariosTable tr').click(function (event) {
-     	  $('#horariosTable tr').children().removeClass("success");
+     $('#tbodyHorarios tr').click(function (event) {
+     	  $('#tbodyHorarios tr').children().removeClass("success");
           //alert($(this).attr('id')); //trying to alert id of the clicked row
           //alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           $(this).children().addClass("success");
@@ -18,10 +18,10 @@ $(document).ready(function () {
  });
 
 
-/********************************************************/
-/* Function to retrieve the data from the hotel admin   */
-/*      form                                            */
-/********************************************************/
+/**********************************************************/
+/* Function to retrieve the data from the horario admin   */
+/*      form                                              */
+/**********************************************************/
 function saveHorarioData() {
 
 
@@ -60,7 +60,8 @@ function statusSaveTour(resultado){
 		alert(resultado);
 	} 		 
 	else {
-		alert("Tour agregado con EXITO!");
+		alert("Horario agregado con EXITO!");
+		$("#formHorariosTour").trigger("reset");
 		loadTours();
 	}
 
@@ -71,6 +72,9 @@ function statusSaveTour(resultado){
 /*      form                                            */
 /********************************************************/
 function verifyData(){
+	if ( ! $("#inputTime").val()) {
+		return false;
+	}
 	return true;
 }
 
@@ -96,8 +100,8 @@ function statusLoadTours(resultado){
 		$("#tbodyHorarios").html(resultado);
 			
 			//NECESITAMOS RECARGAS EL EVENTO EN LOS TR
- 		    $('#horariosTable tr').click(function (event) {
-     		$('#horariosTable tr').children().removeClass("success");
+ 		    $('#tbodyHorarios tr').click(function (event) {
+     		$('#tbodyHorarios tr').children().removeClass("success");
           	//alert($(this).attr('id')); //trying to alert id of the clicked row
           	//alert(this.id + " Hola"+ $(this).children().css("background-color", "red"));
           	$(this).children().addClass("success");
@@ -118,23 +122,26 @@ function eliminarHorario(){
 
 	if (tourIndex != -1) {
 		//MAkE THE AJAX CALL
-		var indice = tourIndex.split(" ");
-		//alert(indice[0]);
-		//alert(indice[1]);
+		if(confirm("Seguro de eliminar el Horario seleccionado?"))
+			{
+			var indice = tourIndex.split(" ");
+			//alert(indice[0]);
+			//alert(indice[1]);
 
-		var data = {
-			horario : indice[1],
-			id_tour : indice[0]
+			var data = {
+				horario : indice[1],
+				id_tour : indice[0]
+			}
+		
+			var message="info="+
+		         escape(JSON.stringify(data))
+
+			//the Ajax call
+			$.post("../controller/eliminahorario.php",message,
+		        statusElimina);
 		}
-	
-		var message="info="+
-	         escape(JSON.stringify(data))
-
-		//the Ajax call
-		$.post("../controller/eliminahorario.php",message,
-	        statusElimina);
 	}else{
-		alert("Para eliminar primero debes seleccionar un registro");
+		//alert("Para eliminar primero debes seleccionar un registro");
 	}
 }
 
