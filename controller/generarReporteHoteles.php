@@ -62,7 +62,7 @@
 
                     if($row_cnt != 0){
                         //generamos la tabla
-                        $mpdf->WriteHTML("<table width='100%' border='1'>");
+                        $mpdf->WriteHTML("<table width='100%' border='0'>");
                         $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='7' align='left'>");
                     
                         $mpdf->WriteHTML($fila[1]);//nombre del hotel en header
@@ -71,13 +71,13 @@
 
 
                         $mpdf->WriteHTML("<tbody>");
-                        $mpdf->WriteHTML("<tr> <th width='8%'>Hab.</th>");
-                        $mpdf->WriteHTML("<th width='25%'> CLIENTE </th>");
-                        $mpdf->WriteHTML("<th> ADULTOS </th>");
-                        $mpdf->WriteHTML("<th> MENORES </th>");
-                        $mpdf->WriteHTML("<th> INSEN </th>");
-                        $mpdf->WriteHTML("<th> HORARIO </th>");
-                        $mpdf->WriteHTML("<th width='8%'> TOUR </th>");
+                        $mpdf->WriteHTML("<tr> <th width='8%' style='border-bottom: 1px solid #000000;'>Hab.</th>");
+                        $mpdf->WriteHTML("<th width='25%' style='border-bottom: 1px solid #000000;'> CLIENTE </th>");
+                        $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> ADULTOS </th>");
+                        $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> MENORES </th>");
+                        $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> INSEN </th>");
+                        $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> HORARIO </th>");
+                        $mpdf->WriteHTML("<th width='8%' style='border-bottom: 1px solid #000000;'> TOUR </th>");
                         $mpdf->WriteHTML("</tr>");
                     }
 
@@ -87,12 +87,12 @@
                         $data .= "<tr id=".$fila_reserva[0]." >\n";//id de la reserva
 
                             //columnas
-                            $data .= "<td>".$fila_reserva[2]."</td>\n";//Num Habitacion
-                            $data .= "<td>".$fila_reserva[1]."</td>\n";//Nombre cliente
-                            $data .= "<td>".$fila_reserva[3]."</td>\n";//adultos
-                            $data .= "<td>".$fila_reserva[4]."</td>\n";//ninos
-                            $data .= "<td>".$fila_reserva[5]."</td>\n";//insen
-                            $data .= "<td>".$fila_reserva[7]."</td>\n";//HORARIO
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[2]."</td>\n";//Num Habitacion
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[1]."</td>\n";//Nombre cliente
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[3]."</td>\n";//adultos
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[4]."</td>\n";//ninos
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[5]."</td>\n";//insen
+                            $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[7]."</td>\n";//HORARIO
                             //$data .= "<td>".$fila_reserva[7]."</td>\n";//TOUR
                             
                             //obtener el numero del tour
@@ -100,9 +100,9 @@
                             
                             if ($resultado_name = $mysqli->query($consulta_name)) {
                                 $fila_name = $resultado_name->fetch_row();
-                                $data .= "<td>".$fila_name[0]."</td>\n";//Nombre Hotel
+                                $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_name[0]."</td>\n";//Nombre Hotel
                             }else{
-                                $data .= "<td>".$fila_reserva[2]."</td>\n";//Clave Hotel
+                                $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_reserva[2]."</td>\n";//Clave Hotel
                             }
                             
                             
@@ -113,6 +113,26 @@
                     }//end while llenado tabla tabla
 
                     if($row_cnt != 0){
+                        ////////////////////////////////
+                        $sql_num = "SELECT SUM(r.num_adultos), SUM(r.num_ninos), SUM(r.num_insen) FROM reserva r WHERE r.clave_institucion='".$fila[0]."' AND r.fecha ='".$fecha."'";
+
+                        if ($res_num = $mysqli->query($sql_num)) {
+                            //obtenemos la suma de los numeros
+                            $numeros = $res_num->fetch_row();
+                            $mpdf->WriteHTML("<tr><td colspan='2'></td><td colspan='4'  style='border-bottom: 1px solid #000000;'>&nbsp;</td></tr>");
+
+                            $mpdf->WriteHTML("<tr>");
+                            $mpdf->WriteHTML("<td colspan='2'>Cantidad de Personas</td>");
+                            $mpdf->WriteHTML("<td>".$numeros[0]."</td>");
+                            $mpdf->WriteHTML("<td>".$numeros[1]."</td>");
+                            $mpdf->WriteHTML("<td>".$numeros[2]."</td>");
+
+                            $total = $numeros[0]+$numeros[1]+$numeros[2];
+                            $mpdf->WriteHTML("<td colspan='2'> TOTAL = ".$total."</td>");
+                            $mpdf->WriteHTML("</tr>");
+
+                        }
+
                         $mpdf->WriteHTML("</tbody>");
                         $mpdf->WriteHTML("</table> <br /><br />");       
                     }

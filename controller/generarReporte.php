@@ -11,6 +11,10 @@
     //the table stylesheet
     $stylesheet = file_get_contents('../mpdf/examples/mpdfstyletables.css');
     $mpdf->WriteHTML($stylesheet,1);
+    /*$table_css = file_get_contents('../bower_components/table_report.css');
+    $mpdf->WriteHTML($table_css,1);*/
+
+
     //$mpdf->useDefaultCSS2 = true;
     
     //set header and footer to the pdf
@@ -54,19 +58,19 @@
 
         if ($resultado = $mysqli->query($consulta)) {
 
-            $mpdf->WriteHTML("<table width='100%' border='1'>");
+            $mpdf->WriteHTML("<table width='100%' border='0' >");
             $mpdf->WriteHTML("<thead><tr style='background-color: #e0e0d1;'><th colspan='7' align='left'>");
             $mpdf->WriteHTML($table_header);
             $mpdf->WriteHTML("</th></tr></thead>");
 
-            $mpdf->WriteHTML("<tbody>");
-            $mpdf->WriteHTML("<tr> <th width='8%'>Hab.</th>");
-            $mpdf->WriteHTML("<th width='25%'> CLIENTE </th>");
-            $mpdf->WriteHTML("<th> ADULTOS </th>");
-            $mpdf->WriteHTML("<th> MENORES </th>");
-            $mpdf->WriteHTML("<th> INSEN </th>");
-            $mpdf->WriteHTML("<th> HORARIO </th>");
-            $mpdf->WriteHTML("<th> HOTEL </th>");
+            $mpdf->WriteHTML("<tbody style='text-align: left;'>");
+            $mpdf->WriteHTML("<tr> <th width='8%' style='border-bottom: 1px solid #000000;'>Hab.</th>");
+            $mpdf->WriteHTML("<th width='25%' style='border-bottom: 1px solid #000000;'> CLIENTE </th>");
+            $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> ADULTOS </th>");
+            $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> MENORES </th>");
+            $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> INSEN </th>");
+            $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> HORARIO </th>");
+            $mpdf->WriteHTML("<th style='border-bottom: 1px solid #000000;'> HOTEL </th>");
             $mpdf->WriteHTML("</tr>");
 
 
@@ -76,21 +80,21 @@
                 $data .= "<tr id=".$fila[0]." >\n";//id de la reserva
 
                     //columnas
-                    $data .= "<td>".$fila[3]."</td>\n";//Num Habitacion
-                    $data .= "<td>".$fila[1]."</td>\n";//Nombre cliente
-                    $data .= "<td>".$fila[4]."</td>\n";//adultos
-                    $data .= "<td>".$fila[5]."</td>\n";//ninos
-                    $data .= "<td>".$fila[6]."</td>\n";//insen
-                    $data .= "<td>".$horario."</td>\n";//horario
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[3]."</td>\n";//Num Habitacion
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[1]."</td>\n";//Nombre cliente
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[4]."</td>\n";//adultos
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[5]."</td>\n";//ninos
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[6]."</td>\n";//insen
+                    $data .= "<td style='border-bottom: 1px solid #000000;'>".$horario."</td>\n";//horario
 
 
                     $consulta_name = "SELECT i.nombre_hotel FROM institucion i WHERE i.clave_hotel = '".$fila[2]."'";
                     
                     if ($resultado_name = $mysqli->query($consulta_name)) {
                         $fila_name = $resultado_name->fetch_row();
-                        $data .= "<td>".$fila_name[0]."</td>\n";//Nombre Hotel
+                        $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila_name[0]."</td>\n";//Nombre Hotel
                     }else{
-                        $data .= "<td>".$fila[2]."</td>\n";//Clave Hotel
+                        $data .= "<td style='border-bottom: 1px solid #000000;'>".$fila[2]."</td>\n";//Clave Hotel
                     }                    
                     
                 $data .= "</tr>\n";
@@ -103,6 +107,8 @@
             if ($res_num = $mysqli->query($sql_num)) {
                 //obtenemos la suma de los numeros
                 $numeros = $res_num->fetch_row();
+                $mpdf->WriteHTML("<tr><td colspan='2'></td><td colspan='4'  style='border-bottom: 1px solid #000000;'>&nbsp;</td></tr>");
+
                 $mpdf->WriteHTML("<tr>");
                 $mpdf->WriteHTML("<td colspan='2'>Cantidad de Personas</td>");
                 $mpdf->WriteHTML("<td>".$numeros[0]."</td>");
@@ -110,7 +116,7 @@
                 $mpdf->WriteHTML("<td>".$numeros[2]."</td>");
 
                 $total = $numeros[0]+$numeros[1]+$numeros[2];
-                $mpdf->WriteHTML("<td colspan='2'> Total = ".$total."</td>");
+                $mpdf->WriteHTML("<td colspan='2'> TOTAL = ".$total."</td>");
                 $mpdf->WriteHTML("</tr>");
 
             }
