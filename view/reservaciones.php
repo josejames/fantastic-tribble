@@ -198,7 +198,8 @@
 							            exit();
 							        }
 
-							        $consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
+							        $consulta = 'SELECT t.id_tour, t.nombre_tour, t.numero_tour FROM tourhorario th, tours t WHERE th.id_tour = t.id_tour GROUP BY t.id_tour';
+							        //$consulta = "SELECT id_tour, nombre_tour, numero_tour FROM tours";
 
 							        if ($resultado = $mysqli->query($consulta)) {
 

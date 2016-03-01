@@ -87,6 +87,10 @@ function verifyData(){
 		alert("Debes seleccionar un recorrido valido");
 		return false;
 	}
+	if (!$("#inputAd").val() && !$("#inputNi").val() && !$("#inputIn").val()) {
+		alert("Debe haber al menos una persona en la reservacion");
+		return false;
+	}
 
 	return true;
 
