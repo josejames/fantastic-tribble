@@ -49,7 +49,7 @@
             while($fila = $resultado->fetch_row()){
 
                 //Para cada tour y horario obtener TODAS sus reservas del DIA
-
+                date_default_timezone_set('America/Mexico_City');
                 $fecha = date("Y-m-d");
                 //$mpdf->WriteHTML('<p>'.$fecha.'</   p>');
                //$sql_reserva = 'SELECT r.id_reserva, r.id_cliente, r.clave_institucion, r.habitacion, r.num_adultos, r.num_ninos, r.num_insen FROM reserva r WHERE r.id_tour = '.$fila[0]." AND r.horario = CAST('".$fila[2]."' as TIME) AND r.fecha = CAST('".date("d-m-Y")."' as DATE)";
