@@ -74,6 +74,16 @@ function statusSaveHotel(resultado){
 /*      form                                            */
 /********************************************************/
 function verifyData(){
+
+	if(!$("#inputNombre").val()){
+		//alert("Debes colocar un nombre de hotel/operador");
+		return false;
+	}
+	if (!$("#inputClave").val()) {
+		return false;
+	}
+
+
 	return true;
 }
 

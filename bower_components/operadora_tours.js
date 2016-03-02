@@ -55,7 +55,11 @@ function statusSaveTour(resultado){
 
 	if (resultado.indexOf("EXITO")==-1) {
 		//algo ocurrio mal
-		alert(resultado);
+		if (resultado.indexOf("Duplicate")!=-1) {
+			alert("El numero de tour "+$("#inputNumero").val().toUpperCase()+" ya existe");
+		}else{
+			alert(resultado);
+		}
 	} 		 
 	else {
 		alert("Tour agregado con EXITO!");
@@ -70,6 +74,13 @@ function statusSaveTour(resultado){
 /*      form                                            */
 /********************************************************/
 function verifyData(){
+
+	if (!$("#inputNombre").val()) {
+		return false;
+	}
+	if (!$("#inputNumero").val()) {
+		return false;
+	}
 	return true;
 }
 

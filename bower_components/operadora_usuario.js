@@ -86,6 +86,25 @@ function statusSaveUsuario(resultado){
 /*      form                                            */
 /********************************************************/
 function verifyData(){
+
+	if (!$("#inputNombre").val()) {
+		return false;
+	}
+	if (!$("#inputAp").val()) {
+		return false;
+	}
+	if (!$("#inputAm").val()) {
+		return false;
+	}
+	if (!$("#inputCuenta").val()) {
+		alert("El usuario debe tener una cuenta");
+		return false;
+	}
+	if (!$("#inputPassword").val()) {
+		alert("El usuario debe tener una contraseña");
+		return false;
+	}
+
 	return true;
 }
 
