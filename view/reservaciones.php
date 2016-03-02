@@ -292,35 +292,16 @@
 		</script>
 		<script type="text/javascript" src="../bower_components/reservaciones.js"></script>
 		<script type="text/javascript">
-		$(function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#inputOrganizacion" ).autocomplete({
-      source: availableTags
-    });
-  });
+			$(function() {
+			   $(window).keypress(function(e) {
+			       var key = e.which;
+			       //alert(key);
+			       //do stuff with "key" here...
+			       if (key == 13) {
+			       	saveReservacion();
+			       };
+			   });
+			});
   </script>
 
 
