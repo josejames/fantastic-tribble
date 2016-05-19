@@ -7,7 +7,7 @@
 
     include("../mpdf/mpdf.php");
     $mpdf = new mPDF(”);
-    
+    date_default_timezone_set('America/Mexico_City');
     //the table stylesheet
     $stylesheet = file_get_contents('../mpdf/examples/mpdfstyletables.css');
     $mpdf->WriteHTML($stylesheet,1);

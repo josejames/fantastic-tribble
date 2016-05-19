@@ -190,7 +190,7 @@ function statusGetUsuario(datos){
 
 function updateUsuario() {
 
-	var result = verifyData();
+	var result = true;
 	var isAdmin;
 
 	if($("#inputAdmin2").is(':checked')) {  

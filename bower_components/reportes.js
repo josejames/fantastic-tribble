@@ -17,6 +17,20 @@ function generarReportes(){
 
 }
 
+function generarReporteUnTour(){
+	var total = $("#selectTour").val();
+	var valores = total.split(" ");
+
+	var idTour = valores[0];
+	var horario = valores[1];
+
+	if (idTour != -1) {
+		//alert("Hey! "+idTour+ " "+horario);
+		var url = '../controller/generarReporteTourUnico.php?id='+idTour+"&horario="+horario;
+		window.open(url,'Reporte de un Único Tour', 'width=800, height=600');
+	};
+}
+
 /*********************************************/
 /* Funcion para cargar un reporte con solo   */
 /* El horario especificado                   */
@@ -63,4 +77,16 @@ function generarReporteHotelHorario(){
 		window.open(url,'Reporte del Dia', 'width=800, height=600');
 	}	
 
+}
+
+function generarReporteHotelUnico(){
+
+	var hotel = $("#selectHotelUnico").val();
+
+	if (hotel != -1) {
+		//alert("hoteles!!!!!");
+		var url = '../controller/generarReporteHotelUnico.php?hotel='+hotel;
+		window.open(url,'Reporte de Recolección Hotel Único', 'width=800, height=600');
+	}
+	
 }

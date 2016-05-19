@@ -6,4 +6,9 @@
 	$clavedb = '';
 	$nombredb = 'operadora_db';
 
+	/*$hostdb = 'mysql.hostinger.mx';
+	$usuariodb = 'u253909348_op';
+	$clavedb = 'operadora';
+	$nombredb = 'u253909348_op';*/
+
 ?>

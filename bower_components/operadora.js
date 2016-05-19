@@ -165,7 +165,7 @@ function statusGetHotel(datos){
 
 function updateHotel() {
 
-	var result = verifyData();
+	var result = true;
 
 	if(result && hotelIndex != -1){
 	//the data

@@ -37,7 +37,7 @@ function  saveReservacion(){
 	var data = {
 			cliente : $("#inputName").val(),
 			habitacion : $("#inputHabitacion").val(),
-			procedencia : $("#selectProcedencia").val(),
+			procedencia : "N/A",
 			id_hotel : $("#selectHotel").val(),
 			id_tour : $("#selectRecorrido").val(),
 			horario : $("#selectHorario").val(),

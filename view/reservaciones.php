@@ -108,7 +108,7 @@
 
 							            /* obtener el array de objetos */
 							            while ($fila = $resultado->fetch_row()) {
-							            	echo '<option value="'.$fila[0].'">'.$fila[0]." ".$fila[1].'</option>';
+							            	echo '<option value="'.$fila[0].'">'.$fila[0]." - ".$fila[1].'</option>';
 							            }
 
 							            /* liberar el conjunto de resultados */
@@ -128,11 +128,11 @@
 					      </div>
 					    </div>
 
-					    <div class="form-group">
+					    <!--<div class="form-group">
 					      <label for="inputProcendencia" class="col-md-2 control-label-sm">Procedencia</label>
 
 					      <div class="col-md-10">
-					        <!--<input type="text" class="form-control" id="inputProcedencia" placeholder="Procedencia">-->
+					        <input type="text" class="form-control" id="inputProcedencia" placeholder="Procedencia">
 					        <select id="selectProcedencia" class="form-control">
 					        	<?php
 									/* Object Oriented */
@@ -171,7 +171,7 @@
 								?>
 					        </select>
 					      </div>
-					    </div>
+					    </div>-->
 
 					    <!--Select-->
 					    <div class="form-group">

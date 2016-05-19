@@ -161,7 +161,7 @@ function statusGetTour(datos){
 
 function updateTour() {
 
-	var result = verifyData();
+	var result = true;
 
 	if(result && tourIndex != -1){
 	//the data
